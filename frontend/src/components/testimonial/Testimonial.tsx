@@ -7,21 +7,21 @@ const testimonialData = [
     {
         testimonial: "Our trip to Bali was absolutely perfect! The itinerary was well-planned with a perfect balance of adventure and relaxation. Our guide was knowledgeable and friendly. Can't wait to book another trip with Wanderlust!",
         star: 5,
-        image: "/Dubai.png",
+        image: "/image/country/Dubai.png",
         name: "John Doe",
         location: "Dubai"
     },
     {
         testimonial: "Our trip to Bali was absolutely perfect! The itinerary was well-planned with a perfect balance of adventure and relaxation. Our guide was knowledgeable and friendly. Can't wait to book another trip with Wanderlust!",
         star: 3,
-        image: "/Dubai.png",
+        image: "/image/country/Dubai.png",
         name: "John Doe",
         location: "Dubai"
     },
     {
         testimonial: "Our trip to Bali was absolutely perfect! The itinerary was well-planned with a perfect balance of adventure and relaxation. Our guide was knowledgeable and friendly. Can't wait to book another trip with Wanderlust!",
         star: 1,
-        image: "/Dubai.png",
+        image: "/image/country/Dubai.png",
         name: "John Doe",
         location: "Dubai"
     },

@@ -5,6 +5,8 @@ import { TravelInspiration } from "@/components/travelinspiration/TravelInspirat
 import { HeroSection } from "@/components/herosection/HeroSection";
 import { MidSection } from "@/components/midsection/MidSection";
 import { Whyus } from "@/components/whyus/Whyus";
+import { AboutSection } from "@/components/aboutsection/AboutSection";
+import { ContactSection } from "@/components/contact/ContactSection";
 
 export default function Home() {
   return (
@@ -12,11 +14,13 @@ export default function Home() {
       <div >
         <HeroSection />
         <MidSection />
+        <AboutSection />
         <Whyus />
         <Region />
         <TopExperience />
         <Testimonial />
         <TravelInspiration />
+        <ContactSection />
       </div>
     </div>
   );

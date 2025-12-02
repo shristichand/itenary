@@ -5,49 +5,49 @@ import { MaxWidthWrapper } from "../common/MaxWidthWrapper";
 
 const regionData = [
     {
-        image: "/Thailand.png",
+        image: "/image/country/Thailand.png",
         country: "Thailand",
         continent: "Asia",
         link: "/"
     },
     {
-        image: "/Dubai.png",
+        image: "/image/country/Dubai.png",
         country: "Dubai",
         continent: "Asia",
         link: "/"
     },
     {
-        image: "/Vietnam.png",
+        image: "/image/country/Vietnam.png",
         country: "Vietnam",
         continent: "Asia",
         link: "/"
     },
     {
-        image: "/Singapore.png",
+        image: "/image/country/Singapore.png",
         country: "Singapore",
         continent: "Asia",
         link: "/"
     },
     {
-        image: "/Maldives.png",
+        image: "/image/country/Maldives.png",
         country: "Maldives",
         continent: "Asia",
         link: "/"
     },
     {
-        image: "/Malaysia.png",
+        image: "/image/country/Malaysia.png",
         country: "Malaysia",
         continent: "Asia",
         link: "/"
     },
     {
-        image: "/Himalaya.png",
+        image: "/image/country/Himalaya.png",
         country: "Himalaya",
         continent: "Asia",
         link: "/"
     },
     {
-        image: "/Thailand.png",
+        image: "/image/country/Thailand.png",
         country: "Thailand",
         continent: "Asia",
         link: "/"

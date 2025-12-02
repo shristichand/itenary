@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Typography } from "../common/Typography";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const menu = [
   {
@@ -23,7 +24,7 @@ const menu = [
   },
   {
     name: "Blog",
-    link: "/blog",
+    link: "/blogs",
   },
 ];
 
@@ -53,9 +54,11 @@ export const Navbar = () => {
       {/* Links */}
       <div className="flex gap-10 justify-center items-center">
         {menu.map((item) => (
-          <Typography key={item.name} styleName="h3" weight="medium" variant="p" className="text-neutral-1000">
-            {item.name}
-          </Typography>
+          <Link key={item.name} href={item.link}>
+            <Typography styleName="h3" weight="medium" variant="p" className="text-neutral-1000">
+              {item.name}
+            </Typography>
+          </Link>
         ))}
       </div>
 

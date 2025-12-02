@@ -5,21 +5,21 @@ import { Card } from "./Card";
 
 const blogData = [
     {
-        image: "/Dubai.png",
+        image: "/image/country/Dubai.png",
         date: "25 Dec 2024",
         name: "John Doe",
         title: "Top 10 Hidden Beaches in Southeast Asia",
         description: "Discover secluded paradises away from the tourist crowds in Thailand, Indonesia, and the Philippines."
     },
-  {
-        image: "/Dubai.png",
+    {
+        image: "/image/country/Dubai.png",
         date: "25 Dec 2024",
         name: "John Doe",
         title: "Top 10 Hidden Beaches in Southeast Asia",
         description: "Discover secluded paradises away from the tourist crowds in Thailand, Indonesia, and the Philippines."
     },
-   {
-        image: "/Dubai.png",
+    {
+        image: "/image/country/Dubai.png",
         date: "25 Dec 2024",
         name: "John Doe",
         title: "Top 10 Hidden Beaches in Southeast Asia",

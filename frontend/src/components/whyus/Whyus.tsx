@@ -28,7 +28,7 @@ export const Whyus = () => {
     return (
         <MaxWidthWrapper>
 
-            <div className="space-y-5 pb-10">
+            <div className="space-y-5 py-10">
                 <SubHeadingContainer headingtext="Why Choose Us" paragraphtext="We go beyond just booking trips. Here's what makes our travel experiences special." />
                 <div className="flex gap-[1.6669rem] ">
 
