@@ -3,7 +3,7 @@ import Image from "next/image"
 import { Typography } from "../common/Typography"
 import Link from "next/link"
 
-export const Card = ({ image, date, name, title, description }: { image: string, date: string, name: string, title: string, description: string }) => {
+export const Card = ({ image, date, name, title, description, slug }: { image: string, date: string, name: string, title: string, description: string, slug: string }) => {
     return (
         <div className="w-95  shadow-[#00000040] shadow-[0px_4px_20px_0px] rounded-[.5rem]">
             <div>
@@ -40,7 +40,7 @@ export const Card = ({ image, date, name, title, description }: { image: string,
 
             <div className="flex justify-end py-5 pr-5">
                 <Link
-                href="/"
+                href={`/blogs/${slug}`}
                 className="flex items-center gap-[.3125rem]"
                 >
                     <Typography styleName="p3" weight="medium" className="text-primary-700">Read More</Typography>

@@ -72,7 +72,7 @@ export const Footer = () => {
                         </Typography>
                         <div className="flex flex-col gap-1">
                             {Links.map((link) => (
-                                <Link href={link.href} className="hover:text-neutral-300 transition-colors">
+                                <Link key={link.name} href={link.href} className="hover:text-neutral-300 transition-colors">
                                     <Typography styleName="p3" weight="regular" className="text-neutral-100">{link.name}</Typography>
                                 </Link>
                             ))}
@@ -86,7 +86,7 @@ export const Footer = () => {
                         </Typography>
                         <div className="flex flex-col gap-1">
                             {ContactInfo.map((info) => (
-                                <div className="flex items-center gap-3">
+                                <div key={info.name} className="flex items-center gap-3">
                                     {info.icon}
                                     <Typography styleName="p3" weight="regular" className="text-neutral-100">
                                         <Link target="_blank" href={info.href}>{info.value}</Link>
@@ -103,7 +103,7 @@ export const Footer = () => {
                         </Typography>
                         <div className="flex flex-col gap-1">
                             {SocialLinks.map((link) => (
-                                <Link target="_blank" href={link.href} className="flex items-center gap-3 hover:text-neutral-300 transition-colors">
+                                <Link target="_blank" key={link.name} href={link.href} className="flex items-center gap-3 hover:text-neutral-300 transition-colors">
                                     {link.icon}
                                     <Typography styleName="p3" weight="regular" className="text-neutral-100">{link.name}</Typography>
                                 </Link>

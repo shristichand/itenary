@@ -1,3 +1,4 @@
+import { Last } from "@/components/about/Last";
 import { OurValues } from "@/components/about/OurValues";
 import { Tag } from "@/components/about/Tag";
 import { TeamSection } from "@/components/about/TeamSection";
@@ -10,6 +11,7 @@ export default function About() {
             <Tag />
             <OurValues />
             <TeamSection />
+            <Last />
         </div>
     )
 }

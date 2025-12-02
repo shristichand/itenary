@@ -4,6 +4,7 @@ import "./globals.css";
 import { Variable } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ChatWidget } from "@/components/common/ChatWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,8 +43,9 @@ export default function RootLayout({
       >
         <Navbar />
         <div className="pt-20 overflow-x-hidden bg-[#F0F0F0]">
-        {children}
+          {children}
         </div>
+        <ChatWidget />
         <Footer />
       </body>
     </html>
