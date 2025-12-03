@@ -1,10 +1,39 @@
+"use client";
 import Image from "next/image";
 import { Typography } from "../common/Typography";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../ui/input-group";
-import { Calendar, Mail, MapPin, Search } from "lucide-react";
+import { Calendar, MapPin, Search } from "lucide-react";
 import { Button } from "../ui/button";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { heroSchema, HeroFormData } from "./schema";
+import { submitInquiry } from "../../lib/api";
 
 export const HeroSection = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<HeroFormData>({
+        resolver: zodResolver(heroSchema),
+    });
+
+    const mutation = useMutation({
+        mutationFn: submitInquiry,
+        onSuccess: () => {
+            alert("Inquiry submitted successfully!");
+        },
+        onError: (error) => {
+            console.error("Error submitting inquiry:", error);
+            alert("Failed to submit inquiry.");
+        },
+    });
+
+    const onSubmit = (data: HeroFormData) => {
+        mutation.mutate(data);
+    };
+
     return (
         <div className="relative w-screen max-w-screen h-167.5 overflow-x-hidden">
             <Image
@@ -26,14 +55,11 @@ export const HeroSection = () => {
                             Unforgettable adventures await. Let us guide you to the most breathtaking destinations around the globe.
                         </Typography>
                     </div>
-
-
                 </div>
 
                 <div >
                     <div className="w-full  bg-[#F0F0F0] p-5 rounded-[.5rem]">
-
-                        <div className="flex flex-col gap-5">
+                        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
 
                             <div className="flex gap-5 ">
                                 <div className="w-full flex flex-col gap-2 ">
@@ -43,7 +69,11 @@ export const HeroSection = () => {
 
                                     <div>
                                         <InputGroup className="border border-neutral-400 focus-visible:ring-0">
-                                            <InputGroupInput placeholder="Where are you going ?" className="placeholder:text-neutral-800 placeholder:text-4 placeholder:leading-6" />
+                                            <InputGroupInput
+                                                placeholder="Where are you going ?"
+                                                className="placeholder:text-neutral-800 placeholder:text-4 placeholder:leading-6"
+                                                {...register("location")}
+                                            />
                                             <InputGroupAddon>
                                                 <MapPin className="size-6 text-[#1D4197]" />
                                             </InputGroupAddon>
@@ -53,6 +83,9 @@ export const HeroSection = () => {
                                                 </InputGroupButton>
                                             </InputGroupAddon>
                                         </InputGroup>
+                                        {errors.location && (
+                                            <span className="text-red-500 text-sm">{errors.location.message}</span>
+                                        )}
                                     </div>
                                 </div>
 
@@ -63,7 +96,12 @@ export const HeroSection = () => {
 
                                     <div>
                                         <InputGroup className="border border-neutral-400 focus-visible:ring-0">
-                                            <InputGroupInput placeholder="Select a date" className="placeholder:text-neutral-800 placeholder:text-4 placeholder:leading-6" />
+                                            <InputGroupInput
+                                                type="date"
+                                                placeholder="Select a date"
+                                                className="placeholder:text-neutral-800 placeholder:text-4 placeholder:leading-6"
+                                                {...register("date")}
+                                            />
                                             <InputGroupAddon>
                                                 <Calendar className="size-6 text-[#1D4197]" />
                                             </InputGroupAddon>
@@ -73,26 +111,25 @@ export const HeroSection = () => {
                                                 </InputGroupButton>
                                             </InputGroupAddon>
                                         </InputGroup>
+                                        {errors.date && (
+                                            <span className="text-red-500 text-sm">{errors.date.message}</span>
+                                        )}
                                     </div>
                                 </div>
                             </div>
 
                             <div className="flex justify-end ">
-                                <Button variant="default" className="px-5! flex! items-center!">
+                                <Button type="submit" variant="default" className="px-5! flex! items-center!" disabled={mutation.isPending}>
                                     <Search className="w-5" />
                                     <Typography styleName="p3" weight="semibold" className="text-neutral-100">
-                                        Search
+                                        {mutation.isPending ? "Searching..." : "Search"}
                                     </Typography>
                                 </Button>
                             </div>
-                        </div>
-
-
+                        </form>
                     </div>
                 </div>
             </div>
-
-
         </div>
     );
 };

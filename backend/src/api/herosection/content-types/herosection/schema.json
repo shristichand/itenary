@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "herosections",
+  "info": {
+    "singularName": "herosection",
+    "pluralName": "herosections",
+    "displayName": "herosection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}

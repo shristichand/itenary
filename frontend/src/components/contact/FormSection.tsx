@@ -1,32 +1,67 @@
+"use client";
 import { Send } from "lucide-react";
 import { Typography } from "../common/Typography";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { contactSchema, ContactFormData } from "./schema";
+import { submitContact } from "../../lib/api";
 
 export const FormSection = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset
+    } = useForm<ContactFormData>({
+        resolver: zodResolver(contactSchema),
+    });
+
+    const mutation = useMutation({
+        mutationFn: submitContact,
+        onSuccess: () => {
+            alert("Message sent successfully!");
+            reset();
+        },
+        onError: (error) => {
+            console.error("Error sending message:", error);
+            alert("Failed to send message.");
+        },
+    });
+
+    const onSubmit = (data: ContactFormData) => {
+        mutation.mutate(data);
+    };
+
     return (
         <div className="basis-1/2 h-fit p-5 rounded-[.5rem] shadow-[#00000040] shadow-[0px_4px_20px_0px] space-y-5 bg-neutral-100">
-            <div className="space-y-3">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                 <div className="space-y-1">
                     <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323]">Your Name</Typography>
-                    <Input placeholder="Enter your name" />
+                    <Input placeholder="Enter your name" {...register("name")} />
+                    {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
                 </div>
                 <div className="space-y-1">
                     <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323]">Email</Typography>
-                    <Input placeholder="Enter your email" />
+                    <Input placeholder="Enter your email" {...register("email")} />
+                    {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
                 </div>
                 <div className="space-y-1">
                     <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323]">Message</Typography>
-                    <Textarea placeholder="Enter your message" className="resize-none " rows={4}/>
+                    <Textarea placeholder="Enter your message" className="resize-none " rows={4} {...register("message")} />
+                    {errors.message && <span className="text-red-500 text-xs">{errors.message.message}</span>}
                 </div>
-            </div>
 
-            <Button variant="default" className="w-full py-[.5625rem] px-[12.9688rem]">
-                <Typography styleName="p3" variant="p" weight="semibold" className="text-neutral-100">
-                    Send Message</Typography>
-                <Send className="w-5" />
-            </Button>
+                <Button type="submit" variant="default" className="w-full py-[.5625rem] px-[12.9688rem]" disabled={mutation.isPending}>
+                    <Typography styleName="p3" variant="p" weight="semibold" className="text-neutral-100">
+                        {mutation.isPending ? "Sending..." : "Send Message"}
+                    </Typography>
+                    <Send className="w-5" />
+                </Button>
+            </form>
         </div>
     );
 };

@@ -5,6 +5,7 @@ import { Variable } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ChatWidget } from "@/components/common/ChatWidget";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,12 +42,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${inter.variable} antialiased`}
       >
-        <Navbar />
-        <div className="pt-20 overflow-x-hidden bg-[#F0F0F0]">
-          {children}
-        </div>
-        <ChatWidget />
-        <Footer />
+        <QueryProvider>
+          <Navbar />
+          <div className="pt-20 overflow-x-hidden bg-[#F0F0F0]">
+            {children}
+          </div>
+          <ChatWidget />
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );

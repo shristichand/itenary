@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_itenary_itenaries",
+  "info": {
+    "displayName": "Itenary"
+  },
+  "options": {},
+  "attributes": {
+    "Day": {
+      "type": "string"
+    },
+    "ListItem": {
+      "type": "component",
+      "component": "list-item.list-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

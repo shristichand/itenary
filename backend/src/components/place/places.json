@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_place_places",
+  "info": {
+    "displayName": "Places"
+  },
+  "options": {},
+  "attributes": {
+    "placeName": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

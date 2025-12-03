@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_infos",
+  "info": {
+    "singularName": "contact-info",
+    "pluralName": "contact-infos",
+    "displayName": "contactInfo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Location": {
+      "type": "string"
+    },
+    "PhoneNumber1": {
+      "type": "string"
+    },
+    "PhoneNumber2": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "MapLink": {
+      "type": "string"
+    }
+  }
+}

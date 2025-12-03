@@ -100,16 +100,14 @@ export const ChatWidget = () => {
                 </div>
             )}
 
-            <div
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-[3.75rem] h-[3.75rem] p-4 bg-[#1D4197] rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-[#153275] transition-colors duration-300"
-            >
-                {isOpen ? (
-                    <X className="text-white w-7 h-7" />
-                ) : (
+            {!isOpen && (
+                <div
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="w-[3.75rem] h-[3.75rem] p-4 bg-[#1D4197] rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-[#153275] transition-colors duration-300"
+                >
                     <MessageCircle className="text-white w-7 h-7" />
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 };

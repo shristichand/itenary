@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "packages",
+  "info": {
+    "singularName": "package",
+    "pluralName": "packages",
+    "displayName": "package"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country"
+    },
+    "Places": {
+      "type": "component",
+      "component": "place.places",
+      "repeatable": true
+    },
+    "Itenary": {
+      "type": "component",
+      "component": "itenary.itenary",
+      "repeatable": true
+    },
+    "Overview": {
+      "type": "text"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Days": {
+      "type": "integer"
+    },
+    "Nights": {
+      "type": "integer"
+    },
+    "Slug": {
+      "type": "string"
+    }
+  }
+}
