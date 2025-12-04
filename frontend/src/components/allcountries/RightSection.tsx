@@ -6,16 +6,25 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { contactSchema, ContactFormData } from "../contact/schema";
-import { submitContact } from "../../lib/api";
+import { sendContactMessage } from "../../api/inquiry";
+import { getContactInfo } from "@/api/home";
 
 interface RightSectionProps {
     bestTime: string;
-    duration: string;
+    days: number;
+    nights: number;
 }
 
-export const RightSection = ({ bestTime, duration }: RightSectionProps) => {
+export const RightSection = ({ bestTime, days, nights }: RightSectionProps) => {
+    let contactInfo = useQuery({
+        queryKey: ["contact-info"],
+        queryFn: () => getContactInfo(),
+        enabled: true,
+    });
+    const contactData = contactInfo?.data?.data?.[0];
+
     const {
         register,
         handleSubmit,
@@ -26,7 +35,7 @@ export const RightSection = ({ bestTime, duration }: RightSectionProps) => {
     });
 
     const mutation = useMutation({
-        mutationFn: submitContact,
+        mutationFn: sendContactMessage,
         onSuccess: () => {
             alert("Message sent successfully!");
             reset();
@@ -42,7 +51,7 @@ export const RightSection = ({ bestTime, duration }: RightSectionProps) => {
     };
 
     return (
-        <div className="w-[25.625rem] h-fit space-y-5 p-5 rounded-[.5rem] bg-neutral-100">
+        <div className="w-102.5 h-fit space-y-5 p-5 rounded-[.5rem] bg-neutral-100">
 
             <Typography styleName="p6" weight="semibold" variant="h1" className="text-[#242323]">
                 Get in Touch
@@ -68,7 +77,7 @@ export const RightSection = ({ bestTime, duration }: RightSectionProps) => {
                             Recommended Duration
                         </Typography>
                         <Typography styleName="p2" weight="regular" variant="h1" className="text-neutral-700 ">
-                            {duration}
+                            {days} days {nights} nights
                         </Typography>
                     </div>
                 </div>
@@ -78,18 +87,18 @@ export const RightSection = ({ bestTime, duration }: RightSectionProps) => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                     <div className="space-y-1">
                         <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323]">Your Name</Typography>
-                        <Input placeholder="Enter your name" className="border border-neutral-700" {...register("name")} />
-                        {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
+                        <Input placeholder="Enter your name" className="border border-neutral-700" {...register("Name")} />
+                        {errors.Name && <span className="text-red-500 text-xs">{errors.Name.message}</span>}
                     </div>
                     <div className="space-y-1">
                         <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323]">Email</Typography>
-                        <Input placeholder="Enter your email" className="border border-neutral-700" {...register("email")} />
-                        {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
+                        <Input placeholder="Enter your email" className="border border-neutral-700" {...register("Email")} />
+                        {errors.Email && <span className="text-red-500 text-xs">{errors.Email.message}</span>}
                     </div>
                     <div className="space-y-1">
                         <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323]">Message</Typography>
-                        <Textarea placeholder="Enter your message" className="resize-none border border-neutral-700" rows={4} {...register("message")} />
-                        {errors.message && <span className="text-red-500 text-xs">{errors.message.message}</span>}
+                        <Textarea placeholder="Enter your message" className="resize-none border border-neutral-700" rows={4} {...register("Message")} />
+                        {errors.Message && <span className="text-red-500 text-xs">{errors.Message.message}</span>}
                     </div>
 
                     <Button type="submit" variant="default" className="w-full py-[.5625rem] px-[12.9688rem]" disabled={mutation.isPending}>
@@ -109,14 +118,14 @@ export const RightSection = ({ bestTime, duration }: RightSectionProps) => {
                 <div className="flex gap-3 items-center">
                     <Phone className="size-5 stroke-[.1044rem] text-primary-700" />
                     <Typography styleName="p3" weight="regular" variant="h1" className="text-[#242323]">
-                        9802016174/01-5925925
+                        {contactData?.PhoneNumber1}/{contactData?.PhoneNumber2}
                     </Typography>
                 </div>
 
                 <div className="flex gap-3 items-center">
                     <Mail className="size-5 stroke-[.1044rem] text-primary-700" />
                     <Typography styleName="p3" weight="regular" variant="h1" className="text-[#242323]">
-                        arc.globaltravel123@gmail.com
+                        {contactData?.Email}
                     </Typography>
                 </div>
             </div>

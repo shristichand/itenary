@@ -2,6 +2,7 @@ import { Typography } from "../common/Typography";
 import { MaxWidthWrapper } from "../common/MaxWidthWrapper";
 import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
+import { getContactInfo, getSocialLinks } from "../../api/home";
 
 const Links = [{
     name: "Home",
@@ -17,40 +18,70 @@ const Links = [{
     href: "/contact"
 }]
 
-const SocialLinks = [{
-    icon: <Facebook className="size-4" />,
-    name: "Facebook",
-    href: "https://www.facebook.com/arcglobaltours"
-}, {
-    icon: <Instagram className="size-4" />,
-    name: "Instagram",
-    href: "https://www.instagram.com/arcglobaltours"
-}, {
-    icon: <Twitter className="size-4" />,
-    name: "X",
-    href: "https://twitter.com/arcglobaltours"
-}]
-
-const ContactInfo = [{
-    icon: <MapPin className="size-4" />,
-    name: "Address",
-    value: "Pingalasthan-09, Gaushala, Kathmandu",
-    href: "https://www.google.com/maps/place/Pingalasthan-09,+Gaushala,+Kathmandu"
-}, {
-    icon: <Phone className="size-4" />,
-    name: "Phone",
-    value: "9802016174/01-5925925",
-    href: "tel:9802016174"
-}, {
-    icon: <Mail className="size-4" />,
-    name: "Email",
-    value: "arc.globaltravel123@gmail.com",
-    href: "mailto:arc.globaltravel123@gmail.com"
-}]
-
 const currentYear = new Date().getFullYear();
 
-export const Footer = () => {
+export const Footer = async () => {
+    let contactData = null;
+    let socialData = [];
+
+
+    const contactRes = await getContactInfo();
+    contactData = contactRes.data[0];
+    const socialRes = await getSocialLinks();
+    socialData = socialRes?.data || [];
+
+    // Fallback or mapped data
+    const address = contactData?.Location;
+
+    const phone = contactData.PhoneNumber1 + (contactData.PhoneNumber2 ? "/" + contactData.PhoneNumber2 : "");
+
+    const email = contactData?.Email ;
+
+
+    const ContactInfo = [{
+        icon: <MapPin className="size-4" />,
+        name: "Address",
+        value: address,
+        href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
+    }, {
+        icon: <Phone className="size-4" />,
+        name: "Phone",
+        value: phone,
+        href: `tel:${phone.split('/')[0]}`
+    }, {
+        icon: <Mail className="size-4" />,
+        name: "Email",
+        value: email,
+        href: `mailto:${email}`
+    }]
+
+    // Helper to get icon for social
+    const getSocialIcon = (name: string) => {
+        const lower = name.toLowerCase();
+        if (lower.includes('facebook')) return <Facebook className="size-4" />;
+        if (lower.includes('instagram')) return <Instagram className="size-4" />;
+        if (lower.includes('twitter') || lower.includes('x')) return <Twitter className="size-4" />;
+        return <Facebook className="size-4" />; // Default
+    };
+
+    const SocialLinks = socialData.length > 0 ? socialData.map((item: any) => ({
+        icon: getSocialIcon(item.attributes?.platform || item.platform || "Facebook"),
+        name: item.attributes?.platform || item.platform || "Social",
+        href: item.attributes?.url || item.url || "#"
+    })) : [{
+        icon: <Facebook className="size-4" />,
+        name: "Facebook",
+        href: "https://www.facebook.com/arcglobaltours"
+    }, {
+        icon: <Instagram className="size-4" />,
+        name: "Instagram",
+        href: "https://www.instagram.com/arcglobaltours"
+    }, {
+        icon: <Twitter className="size-4" />,
+        name: "X",
+        href: "https://twitter.com/arcglobaltours"
+    }];
+
     return (
         <footer className="bg-[#1D4197] text-neutral-100 ">
             <MaxWidthWrapper>
@@ -102,7 +133,7 @@ export const Footer = () => {
                             Socials
                         </Typography>
                         <div className="flex flex-col gap-1">
-                            {SocialLinks.map((link) => (
+                            {SocialLinks.map((link: any) => (
                                 <Link target="_blank" key={link.name} href={link.href} className="flex items-center gap-3 hover:text-neutral-300 transition-colors">
                                     {link.icon}
                                     <Typography styleName="p3" weight="regular" className="text-neutral-100">{link.name}</Typography>

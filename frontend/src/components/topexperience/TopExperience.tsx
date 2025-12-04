@@ -1,57 +1,35 @@
 import { SubHeadingContainer } from "../common/SubHeadingContainer";
 import { MaxWidthWrapper } from "../common/MaxWidthWrapper";
-import { Card } from "../region/Card";
+import { getBlogs } from "@/api/blog";
+import { Card } from "./Card";
+import { getPackages } from "@/api/package";
 
 
-const regionData = [
-    {
-        image: "/image/country/Thailand.png",
-        country: "Kuta & Seminyak Beach Escape",
-        continent: "Beach clubs, surfing, shopping, and stunning sunsets.",
-        link: "/"
-    },
-    {
-        image: "/image/country/Dubai.png",
-        country: "Janakpur Cultural Experience",
-        continent: "Birthplace of Goddess Sita and Mithila culture.",
-        link: "/"
-    },
-    {
-        image: "/image/country/Vietnam.png",
-        country: "Vietnam",
-        continent: "Asia",
-        link: "/"
-    },
-    {
-        image: "/image/country/Singapore.png",
-        country: "Singapore",
-        continent: "Asia",
-        link: "/"
-    },
-    {
-        image: "/image/country/Maldives.png",
-        country: "Maldives",
-        continent: "Asia",
-        link: "/"
-    },
-    {
-        image: "/image/country/Malaysia.png",
-        country: "Malaysia",
-        continent: "Asia",
-        link: "/"
-    },
 
-]
-export const TopExperience = () => {
+export const TopExperience = async () => {
+    let packageData: any[] = [];
+    try {
+        const res = await getPackages();
+        packageData = res?.data || [];
+    } catch (error) {
+        console.log(error)
+    }
     return (
         <section>
             <MaxWidthWrapper>
                 <div className="space-y-10 py-10 ">
                     <SubHeadingContainer headingtext="Our Top Experiences" paragraphtext="Carefully curated tour packages designed to showcase the best each destination has to offer." />
                     <div className="flex flex-wrap justify-center gap-x-7.5 gap-y-10 ">
-                        {regionData.map((item, index) => (
-                            <Card key={index} image={item.image} country={item.country} continent={item.continent} link={item.link} />
+                        {/* if(regionData){ */}
+
+                        {packageData.map((item: any, index: number) => (
+                            <Card key={index} image={`${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${item?.Image?.url}`} country={item?.Title} continent={item?.Description} link={item?.Slug} />
                         ))}
+                        {/* }else{
+                        //      {regionData.map((item: any, index: number) => (
+                        //     <Card key={index} image={item.image} country={item.country} continent={item.continent} link={item.link} />
+                        // ))}
+                        } */}
                     </div>
                 </div>
 

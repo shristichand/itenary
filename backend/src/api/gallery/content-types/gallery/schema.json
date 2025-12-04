@@ -11,11 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "country": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::country.country"
-    },
     "Image": {
       "type": "media",
       "multiple": true,
@@ -23,6 +18,11 @@
         "images",
         "files"
       ]
+    },
+    "country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country"
     }
   }
 }

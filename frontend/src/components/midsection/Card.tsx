@@ -8,8 +8,8 @@ export const Card = ({ title, subtitle, icon }: { title: string, subtitle: strin
                 <Image
                     src={icon}
                     alt="midsection"
-                    width={40}
-                    height={40}
+                    width={400}
+                    height={400}
                     className="w-7 h-7 rounded-full"
                 />
             </div>

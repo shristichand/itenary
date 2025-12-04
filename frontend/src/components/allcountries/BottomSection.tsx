@@ -1,51 +1,24 @@
+"use client"
 import Link from "next/link";
 import { Typography } from "../common/Typography";
 import { SendReview } from "./SendReview";
 import { Review } from "./Review";
+import { useQuery } from "@tanstack/react-query";
+import { getReviewByPackageId } from "../../api/review";
 
-const reviewData = [{
-    star: 5,
-    date: "2025-12-02",
-    img: "/image/about/team1.png",
-    name: "John Doe",
-    location: "New York, USA",
-    review: "This is the best place I have ever been to. The food was amazing and the people were so friendly. I would highly recommend this place to everyone."
-},
-{
-    star: 4,
-    date: "2025-12-02",
-    img: "/image/about/team2.png",
-    name: "John Doe",
-    location: "New York, USA",
-    review: "This is the best place I have ever been to. The food was amazing and the people were so friendly. I would highly recommend this place to everyone."
-},
-{
-    star: 3,
-    date: "2025-12-02",
-    img: "/image/about/team3.png",
-    name: "John Doe",
-    location: "New York, USA",
-    review: "This is the best place I have ever been to. The food was amazing and the people were so friendly. I would highly recommend this place to everyone."
-},
-{
-    star: 3,
-    date: "2025-12-02",
-    img: "/image/about/team3.png",
-    name: "John Doe",
-    location: "New York, USA",
-    review: "This is the best place I have ever been to. The food was amazing and the people were so friendly. I would highly recommend this place to everyone."
-},
-{
-    star: 3,
-    date: "2025-12-02",
-    img: "/image/about/team3.png",
-    name: "John Doe",
-    location: "New York, USA",
-    review: "This is the best place I have ever been to. The food was amazing and the people were so friendly. I would highly recommend this place to everyone."
+interface BottomSectionProps {
+    packageId: string;
 }
-]
 
-export const BottomSection = () => {
+export const BottomSection = ({ packageId }: BottomSectionProps) => {
+    const { data: reviewsData } = useQuery({
+        queryKey: ["reviews", packageId],
+        queryFn: () => getReviewByPackageId(packageId),
+        enabled: !!packageId,
+    });
+
+    const reviews = reviewsData?.data || [];
+
     return (
         <div className="pt-5 space-y-5">
             <div className="flex justify-between items-center">
@@ -62,11 +35,25 @@ export const BottomSection = () => {
 
             <div className="flex gap-10 justify-between">
                 <div className="space-y-5">
-                    {reviewData.map((review, index) => (
-                        <Review key={index} {...review} />
-                    ))}
+                    {reviews.length > 0 ? (
+                        reviews.map((review: any, index: number) => (
+                            <Review
+                                key={index}
+                                star={review.Rating}
+                                date={new Date(review.createdAt).toLocaleDateString()}
+                                img="/image/icons/profileAvatar.png" // Placeholder image
+                                name={review.Name}
+                                location={review.Location}
+                                review={review.Review}
+                            />
+                        ))
+                    ) : (
+                        <Typography styleName="p3" variant="p" weight="regular" className="text-neutral-500">
+                            No reviews yet. Be the first to review!
+                        </Typography>
+                    )}
                 </div>
-                <SendReview />
+                <SendReview packageId={packageId} />
             </div>
         </div>
     );

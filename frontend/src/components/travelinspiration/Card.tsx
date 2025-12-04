@@ -40,11 +40,11 @@ export const Card = ({ image, date, name, title, description, slug }: { image: s
 
             <div className="flex justify-end py-5 pr-5">
                 <Link
-                href={`/blogs/${slug}`}
-                className="flex items-center gap-[.3125rem]"
+                    href={`/blogs/${slug}`}
+                    className="flex items-center gap-[.3125rem]"
                 >
                     <Typography styleName="p3" weight="medium" className="text-primary-700">Read More</Typography>
-                    <ArrowRight className="size-4 text-primary-700"/>
+                    <ArrowRight className="size-4 text-primary-700" />
                 </Link>
 
             </div>

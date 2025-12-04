@@ -3,160 +3,48 @@ import { Funnel, ChevronDown } from "lucide-react"
 import { MaxWidthWrapper } from "../common/MaxWidthWrapper"
 import { SubHeadingContainer } from "../common/SubHeadingContainer"
 import { Typography } from "../common/Typography"
-import { useState } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Card } from "../region/Card"
+import { getPackagesByCountry } from "@/api/package"
 
-const countries = [
-    "All Countries",
-    "Dubai",
-    "Malaysia",
-    "Thailand",
-    "Singapore",
-    "Maldives",
-    "Vietnam",
-    "Indonesia",
-    "Nepal"
-]
+interface AllCountriesProps {
+    packages?: any[];
+}
 
-const packages = [
-    {
-        image: "/image/country/Thailand.png",
-        country: "Thailand",
-        continent: "Asia",
-        link: "/packages/thailand-adventure",
-        description: "Experience the vibrant culture and stunning islands of Thailand."
-    },
-    {
-        image: "/image/country/Dubai.png",
-        country: "Dubai",
-        continent: "Asia",
-        link: "/packages/dubai-luxury",
-        description: "Indulge in the luxury and modern wonders of Dubai."
-    },
-    {
-        image: "/image/country/Vietnam.png",
-        country: "Vietnam",
-        continent: "Asia",
-        link: "/packages/vietnam-culture",
-        description: "Discover the rich history and landscapes of Vietnam."
-    },
-    {
-        image: "/image/country/Singapore.png",
-        country: "Singapore",
-        continent: "Asia",
-        link: "/packages/singapore-city",
-        description: "Explore the modern marvels and green spaces of Singapore."
-    },
-    {
-        image: "/image/country/Maldives.png",
-        country: "Maldives",
-        continent: "Asia",
-        link: "/packages/maldives-honeymoon",
-        description: "Relax in the paradise of the Maldives."
-    },
-    {
-        image: "/image/country/Malaysia.png",
-        country: "Malaysia",
-        continent: "Asia",
-        link: "/packages/malaysia-nature",
-        description: "Experience the diversity of Malaysia."
-    },
-    {
-        image: "/image/country/Himalaya.png",
-        country: "Himalaya",
-        continent: "Asia",
-        link: "/packages/himalaya-trek",
-        description: "Trek through the majestic Himalayas."
-    },
-    {
-        image: "/image/country/Thailand.png",
-        country: "Thailand",
-        continent: "Asia",
-        link: "/packages/thailand-adventure",
-        description: "Experience the vibrant culture and stunning islands of Thailand."
-    },
-    {
-        image: "/image/country/Malaysia.png",
-        country: "Malaysia",
-        continent: "Asia",
-        link: "/packages/malaysia-nature",
-        description: "Experience the diversity of Malaysia."
-    },
-    {
-        image: "/image/country/Himalaya.png",
-        country: "Himalaya",
-        continent: "Asia",
-        link: "/packages/himalaya-trek",
-        description: "Trek through the majestic Himalayas."
-    },
-    {
-        image: "/image/country/Thailand.png",
-        country: "Thailand",
-        continent: "Asia",
-        link: "/packages/thailand-adventure",
-        description: "Experience the vibrant culture and stunning islands of Thailand."
-    },
-    {
-        image: "/image/country/Malaysia.png",
-        country: "Malaysia",
-        continent: "Asia",
-        link: "/packages/malaysia-nature",
-        description: "Experience the diversity of Malaysia."
-    },
-    {
-        image: "/image/country/Himalaya.png",
-        country: "Himalaya",
-        continent: "Asia",
-        link: "/packages/himalaya-trek",
-        description: "Trek through the majestic Himalayas."
-    },
-    {
-        image: "/image/country/Thailand.png",
-        country: "Thailand",
-        continent: "Asia",
-        link: "/packages/thailand-adventure",
-        description: "Experience the vibrant culture and stunning islands of Thailand."
-    },
-    {
-        image: "/image/country/Malaysia.png",
-        country: "Malaysia",
-        continent: "Asia",
-        link: "/packages/malaysia-nature",
-        description: "Experience the diversity of Malaysia."
-    },
-    {
-        image: "/image/country/Himalaya.png",
-        country: "Himalaya",
-        continent: "Asia",
-        link: "/packages/himalaya-trek",
-        description: "Trek through the majestic Himalayas."
-    },
-    {
-        image: "/image/country/Thailand.png",
-        country: "Thailand",
-        continent: "Asia",
-        link: "/packages/thailand-adventure",
-        description: "Experience the vibrant culture and stunning islands of Thailand."
-    },
-    {
-        image: "/image/country/Thailand.png",
-        country: "Thailand",
-        continent: "Asia",
-        link: "/packages/thailand-adventure",
-        description: "Experience the vibrant culture and stunning islands of Thailand."
-    },
-]
-
-export const AllCountries = () => {
+export const AllCountries = ({ packages = [] }: AllCountriesProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState("All Countries")
+    const [displayPackages, setDisplayPackages] = useState(packages)
 
     const toggleDropdown = () => setIsOpen(!isOpen)
 
-    const handleSelect = (country: string) => {
+    const handleSelect = async (country: string) => {
         setSelectedCountry(country)
         setIsOpen(false)
+
+        if (country === "All Countries") {
+            setDisplayPackages(packages);
+        } else {
+            try {
+                const res = await getPackagesByCountry(country);
+                setDisplayPackages(res?.data || []);
+            } catch (error) {
+                console.error("Failed to filter packages:", error);
+            }
+        }
     }
+
+    const countries = useMemo(() => {
+        const uniqueCountries = new Set(packages.map(p => {
+            const attr = p.attributes || p;
+            return attr.country?.name || attr.country?.data?.attributes?.name;
+        }));
+        return ["All Countries", ...Array.from(uniqueCountries).filter(Boolean)];
+    }, [packages]);
+
+    useEffect(() => {
+        setDisplayPackages(packages);
+    }, [packages]);
 
     return (
         <MaxWidthWrapper>
@@ -194,7 +82,7 @@ export const AllCountries = () => {
 
                             {isOpen && (
                                 <div className="absolute top-full left-0 w-full bg-[#E8E8E8] rounded-b-[.25rem] shadow-lg z-50 max-h-[300px] overflow-y-auto transition-all  duration-200">
-                                    {countries.map((country) => (
+                                    {countries.map((country: any) => (
                                         <div
                                             key={country}
                                             className={`px-4 py-2 cursor-pointer transition-colors ${selectedCountry === country
@@ -219,14 +107,26 @@ export const AllCountries = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[1.875rem] gap-y-10">
-                    {selectedCountry === "All Countries" ? (
-                        packages.map((item, index) => (
-                            <Card key={index} image={item.image} country={item.country} continent={item.continent} link={item.link} description={item.description} />
-                        ))
+                    {displayPackages.length > 0 ? (
+                        displayPackages.map((item, index) => {
+                            const attr = item.attributes || item;
+                            const imageUrl = attr.image?.url
+                                ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${attr.image.url}`
+                                : "/image/country/Thailand.png";
+
+                            return (
+                                <Card
+                                    key={index}
+                                    image={imageUrl}
+                                    country={attr.Title || attr.country?.data?.attributes?.name}
+                                    continent={attr.continent?.Description || attr.continent?.data?.attributes?.name}
+                                    link={`/packages/${attr.Slug}`}
+                                    description={attr.Description}
+                                />
+                            );
+                        })
                     ) : (
-                        packages.filter((item) => item.country === selectedCountry).map((item, index) => (
-                            <Card key={index} image={item.image} country={item.country} continent={item.continent} link={item.link} description={item.description} />
-                        ))
+                        <p className="text-center col-span-full text-neutral-500">No packages found.</p>
                     )}
                 </div>
             </div>

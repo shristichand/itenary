@@ -2,23 +2,28 @@
 import Image from "next/image"
 import { Typography } from "../common/Typography"
 import { Facebook, Instagram, X } from "lucide-react"
-import { blogData, TravelInspiration } from "../travelinspiration/TravelInspiration"
 import { MaxWidthWrapper } from "../common/MaxWidthWrapper"
 import { Card } from "../travelinspiration/Card"
 import Link from "next/link"
 
-export const BlogBottom = ({ slug }: { slug: string }) => {
-    console.log(slug)
+export const BlogBottom = ({ blog, relatedBlogs = [] }: { blog: any, relatedBlogs?: any[] }) => {
+    const attr = blog?.attributes || blog;
+
     return (
         <MaxWidthWrapper>
-            <p className="pt-10 pb-5">Blog Content</p>
+            <div className="pt-10 pb-5">
+                {/* Render rich text content here. For now just description */}
+                <Typography styleName="p3" weight="regular" className="text-neutral-800">
+                    {attr?.Content || attr?.Description || "No content available."}
+                </Typography>
+            </div>
 
             <div className="space-y-5">
                 <div className="flex gap-5">
                     <div className="min-w-20 h-20 ">
                         <Image
-                            src="/image/about/team1.png"
-                            alt="blog"
+                            src={attr?.author?.Image?.url ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${attr.author.Image.url}` : "/image/about/team1.png"}
+                            alt="author"
                             width={500}
                             height={500}
                             className="w-full h-full object-cover rounded-full"
@@ -26,10 +31,10 @@ export const BlogBottom = ({ slug }: { slug: string }) => {
                     </div>
                     <div className="space-y-1">
                         <Typography styleName="p6" weight="medium" variant="p" className="text-[#242323] ">
-                            David Kim
+                            {attr?.author?.Name || "Admin"}
                         </Typography>
                         <Typography styleName="p6" weight="medium" variant="p" className="text-neutral-900 ">
-                            Travel writer and photographer with a passion for discovering hidden gems around the world. Sharing stories and tips to inspire your next adventure.
+                            {attr?.author?.AuthorDescription || "No author description available."}
                         </Typography>
                     </div>
                 </div>
@@ -46,7 +51,7 @@ export const BlogBottom = ({ slug }: { slug: string }) => {
                             </Typography>
                         </div>
 
-                        <Link href={`https://www.facebook.com/sharer/sharer.php?u=https://www.example.com/${slug}`} >
+                        <Link href={`https://www.facebook.com/sharer/sharer.php?u=https://www.example.com/blogs/${attr?.slug}`} >
                             <div className="w-10 h-10 rounded-full bg-[#1D4197] flex items-center justify-center">
                                 <Facebook className="w-5 text-neutral-100" />
                             </div>
@@ -58,7 +63,7 @@ export const BlogBottom = ({ slug }: { slug: string }) => {
                             </div>
                         </div>
 
-                        <Link href={`https://twitter.com/intent/tweet?text=YOUR_TEXT&url=https://www.example.com/${slug}`}>
+                        <Link href={`https://twitter.com/intent/tweet?text=${attr?.title}&url=https://www.example.com/blogs/${attr?.slug}`}>
 
                             <div className="w-10 h-10 rounded-full bg-[#1D4197] flex items-center justify-center">
                                 <X className="w-5 text-neutral-100" />
@@ -73,9 +78,27 @@ export const BlogBottom = ({ slug }: { slug: string }) => {
                     </Typography>
 
                     <div className="flex flex-wrap gap-x-7.5 gap-y-10 ">
-                        {blogData.filter((item) => item.slug !== slug).map((item, index) => (
-                            <Card key={index} image={item.image} date={item.date} name={item.name} title={item.title} description={item.description} slug={item.slug} />
-                        ))}
+                        {relatedBlogs.length > 0 ? (
+                            relatedBlogs.map((item, index) => {
+                                const rAttr = item.attributes || item;
+                                const imageUrl = rAttr.image?.data?.attributes?.url
+                                    ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${rAttr.image.data.attributes.url}`
+                                    : "/image/country/Dubai.png";
+                                return (
+                                    <Card
+                                        key={index}
+                                        image={imageUrl}
+                                        date={rAttr.date}
+                                        name={rAttr.author}
+                                        title={rAttr.title}
+                                        description={rAttr.description}
+                                        slug={rAttr.slug}
+                                    />
+                                );
+                            })
+                        ) : (
+                            <p>No related articles found.</p>
+                        )}
                     </div>
                 </div>
             </div>

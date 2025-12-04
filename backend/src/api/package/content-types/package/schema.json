@@ -11,11 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Country": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::country.country"
-    },
     "Places": {
       "type": "component",
       "component": "place.places",
@@ -43,6 +38,32 @@
     },
     "Slug": {
       "type": "string"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country"
+    },
+    "continent": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::continent.continent"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "package"
     }
   }
 }

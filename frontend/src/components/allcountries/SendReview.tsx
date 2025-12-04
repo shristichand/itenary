@@ -9,9 +9,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { reviewSchema, ReviewFormData } from "./schema";
-import { submitReview } from "../../lib/api";
+import { sendReview } from "../../api/review";
 
-export const SendReview = () => {
+export const SendReview = ({ packageId }: { packageId: string }) => {
     const [rating, setRating] = useState(0);
     const {
         register,
@@ -24,7 +24,7 @@ export const SendReview = () => {
     });
 
     const mutation = useMutation({
-        mutationFn: submitReview,
+        mutationFn: sendReview,
         onSuccess: () => {
             alert("Review submitted successfully!");
             reset();
@@ -37,16 +37,26 @@ export const SendReview = () => {
     });
 
     const onSubmit = (data: ReviewFormData) => {
-        mutation.mutate(data);
+        const payload = {
+            Name: data.Name,
+            Email: data.Email,
+            Location: data.Location,
+            Rating: data.Rating,
+            Review: data.Review,
+            package: {
+                connect: [packageId]
+            }
+        };
+        mutation.mutate(payload);
     };
 
     const handleRatingChange = (star: number) => {
         setRating(star);
-        setValue("rating", star, { shouldValidate: true });
+        setValue("Rating", star, { shouldValidate: true });
     };
 
     return (
-        <div className="w-[35rem] h-fit space-y-5 bg-neutral-100 py-10 px-5 rounded-[.5rem]">
+        <div className="w-140 h-fit space-y-5 bg-neutral-100 py-10 px-5 rounded-[.5rem]">
             <Typography styleName="p6" weight="semibold" variant="h1" className="text-[#242323]">
                 Leave a Review
             </Typography>
@@ -55,15 +65,21 @@ export const SendReview = () => {
                 <div className="flex gap-5">
                     <div className="space-y-1 w-full">
                         <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Name</Typography>
-                        <Input placeholder="Enter your name" {...register("name")} />
-                        {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
+                        <Input placeholder="Enter your name" {...register("Name")} />
+                        {errors.Name && <span className="text-red-500 text-xs">{errors.Name.message}</span>}
                     </div>
 
                     <div className="space-y-1 w-full">
                         <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Email</Typography>
-                        <Input placeholder="Enter your email" {...register("email")} />
-                        {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
+                        <Input placeholder="Enter your email" {...register("Email")} />
+                        {errors.Email && <span className="text-red-500 text-xs">{errors.Email.message}</span>}
                     </div>
+                </div>
+
+                <div className="space-y-1">
+                    <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Location</Typography>
+                    <Input placeholder="Enter your location" {...register("Location")} />
+                    {errors.Location && <span className="text-red-500 text-xs">{errors.Location.message}</span>}
                 </div>
 
                 <div className="space-y-1">
@@ -84,14 +100,14 @@ export const SendReview = () => {
                             </button>
                         ))}
                     </div>
-                    <input type="hidden" {...register("rating", { valueAsNumber: true })} />
-                    {errors.rating && <span className="text-red-500 text-xs">{errors.rating.message}</span>}
+                    <input type="hidden" {...register("Rating", { valueAsNumber: true })} />
+                    {errors.Rating && <span className="text-red-500 text-xs">{errors.Rating.message}</span>}
                 </div>
 
                 <div className="space-y-1">
                     <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Reviews</Typography>
-                    <Textarea placeholder="Enter your review" className="resize-none" {...register("review")} />
-                    {errors.review && <span className="text-red-500 text-xs">{errors.review.message}</span>}
+                    <Textarea placeholder="Enter your review" className="resize-none" {...register("Review")} />
+                    {errors.Review && <span className="text-red-500 text-xs">{errors.Review.message}</span>}
                 </div>
 
                 <Button type="submit" variant="default" className="w-full py-[.5625rem] px-[12.7188rem]" disabled={mutation.isPending}>

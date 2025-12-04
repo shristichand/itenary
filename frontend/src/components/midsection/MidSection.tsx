@@ -1,35 +1,32 @@
+import { getStatData } from "@/api/home";
 import { MaxWidthWrapper } from "../common/MaxWidthWrapper";
 import { Card } from "./Card";
 
-const cards = [
-    {
-        title: "15+ Years",
-        subtitle: "Of Experience",
-        icon: "/image/icons/medal.svg",
-    },
-    {
-        title: "15+ Years",
-        subtitle: "Of Experience",
-        icon: "/image/icons/medal.svg",
-    },
-    {
-        title: "15+ Years",
-        subtitle: "Of Experience",
-        icon: "/image/icons/medal.svg",
-    },
-    {
-        title: "15+ Years",
-        subtitle: "Of Experience",
-        icon: "/image/icons/medal.svg",
-    },
+const icons = [
+    "/image/icons/medal.svg",
+    "/image/icons/globe.svg",
+    "/image/icons/travellers.svg",
+    "/image/icons/safe.svg",
 ]
+export const MidSection = async () => {
+    let stats = [];
+    try {
+        const res = await getStatData();
+        stats = res?.data || [];
+    } catch (error) {
+        console.error("Failed to fetch stats:", error);
+    }
 
-export const MidSection = () => {
     return (
         <MaxWidthWrapper>
             <div className="flex gap-[1.6669rem] py-10">
-                {cards.map((card, index) => (
-                    <Card key={index} title={card.title} subtitle={card.subtitle} icon={card.icon} />
+                {stats.map((card: any, index: number) => (
+                    <Card
+                        key={index}
+                        title={card.Title}
+                        subtitle={card.Description}
+                        icon={icons[index]}
+                    />
                 ))}
             </div>
         </MaxWidthWrapper>

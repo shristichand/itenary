@@ -23,8 +23,14 @@
     "Review": {
       "type": "text"
     },
-    "Slug": {
-      "type": "string"
+    "package": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::package.package",
+      "inversedBy": "reviews"
+    },
+    "Email": {
+      "type": "email"
     }
   }
 }

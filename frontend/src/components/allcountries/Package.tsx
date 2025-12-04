@@ -1,4 +1,4 @@
-import { ArrowLeft, Calendar, MapPin, Timer, User } from "lucide-react";
+import { ArrowLeft, MapPin, Timer } from "lucide-react";
 import Image from "next/image";
 import { Typography } from "../common/Typography";
 import { MaxWidthWrapper } from "../common/MaxWidthWrapper";
@@ -6,11 +6,10 @@ import { MidSection } from "./MidSection";
 import { RightSection } from "./RightSection";
 import { Card } from "../gallery/Card";
 import { BottomSection } from "./BottomSection";
-import { packageData } from "../../data/packages";
 import Link from "next/link";
 
-export const Package = ({ slug }: { slug: string }) => {
-    const currentPackage = packageData.find((item) => item.slug === slug);
+export const Package = ({ packageData }: { packageData: any }) => {
+    const currentPackage = packageData?.attributes || packageData;
 
     if (!currentPackage) {
         return (
@@ -24,13 +23,17 @@ export const Package = ({ slug }: { slug: string }) => {
         );
     }
 
+    const imageUrl = currentPackage.image?.data?.attributes?.url
+        ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${currentPackage.image.data.attributes.url}`
+        : "/image/country/Thailand.png";
+
     return (
         <div className="pb-10 ">
             <div>
                 <div className="w-full relative h-62.5  overflow-hidden">
                     <Image
-                        src={currentPackage.coverImage}
-                        alt="blog"
+                        src={imageUrl}
+                        alt="package"
                         width={500}
                         height={500}
                         className="w-full h-full object-cover object-bottom translate-y-[.0625rem]"
@@ -51,18 +54,18 @@ export const Package = ({ slug }: { slug: string }) => {
                         <div className="text-center  px-43.5 space-y-5 pb-2">
                             <div className="space-y-5">
                                 <Typography styleName="sub6" weight="semibold" variant="p" className="text-neutral-100 ">
-                                    {currentPackage.title}
+                                    {currentPackage.Title}
                                 </Typography>
 
                                 <Typography styleName="p3" weight="regular" variant="p" className="text-[#E8E8E8]">
-                                    {currentPackage.description}
+                                    {currentPackage.Description}
                                 </Typography>
 
                                 <div className="flex gap-10.5 justify-center items-center ">
                                     <div className="flex gap-1 items-center">
                                         <MapPin className="w-5 text-[#D2D2D2]" />
                                         <Typography styleName="p6" weight="semibold" variant="p" className="text-[#D2D2D2]">
-                                            {currentPackage.location}
+                                            {currentPackage.country.name}
                                         </Typography>
                                     </div>
 
@@ -71,7 +74,7 @@ export const Package = ({ slug }: { slug: string }) => {
                                     <div className="flex gap-1 items-center">
                                         <Timer className="w-5  text-[#D2D2D2]" />
                                         <Typography styleName="p6" weight="semibold" variant="p" className="text-[#D2D2D2]">
-                                            {currentPackage.readTime}
+                                            {currentPackage.Days || "N/A"} days {currentPackage.Nights || "N/A"} nights
                                         </Typography>
                                     </div>
                                 </div>
@@ -86,13 +89,20 @@ export const Package = ({ slug }: { slug: string }) => {
             <MaxWidthWrapper>
                 <div className="flex gap-10 justify-between pt-10 pb-5">
                     <MidSection
-                        description={currentPackage.description}
-                        places={currentPackage.places}
-                        itinerary={currentPackage.itinerary}
+                        description={currentPackage.Description}
+                        places={currentPackage.Places?.map((place: any) => ({
+                            text: place.placeName,
+                            icon: "MapPin"
+                        })) || []}
+                        itinerary={currentPackage.Itenary?.map((item: any) => ({
+                            day: item.Day,
+                            lists: item.ListItem?.map((l: any) => l.ListItem) || []
+                        })) || []}
                     />
                     <RightSection
-                        bestTime={currentPackage.bestTime}
-                        duration={currentPackage.duration}
+                        bestTime={currentPackage.BestTime || "Year Round"}
+                        days={currentPackage.Days || 0}
+                        nights={currentPackage.Nights || 0}
                     />
                 </div>
 
@@ -102,13 +112,16 @@ export const Package = ({ slug }: { slug: string }) => {
                     </Typography>
 
                     <div className="grid grid-cols-3 gap-x-[1.9063rem] gap-y-5">
-                        {currentPackage.galleryImages.map((img, index) => (
-                            <Card key={index} img={img} />
-                        ))}
+                        {currentPackage.gallery?.data?.map((img: any, index: number) => {
+                            const galleryUrl = img.attributes?.url
+                                ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${img.attributes.url}`
+                                : "/image/country/Thailand.png";
+                            return <Card key={index} img={galleryUrl} />;
+                        })}
                     </div>
                 </div>
 
-                <BottomSection />
+                <BottomSection packageId={currentPackage.id} />
             </MaxWidthWrapper>
         </div>
     );
