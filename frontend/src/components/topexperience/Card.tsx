@@ -8,7 +8,7 @@ export const Card = ({ image, country, continent, link, description }: { image: 
     return (
         <div className="relative w-95 h-100 rounded-[.5rem] group overflow-hidden">
             <Link href={link}>
-                <img
+                <Image
                     src={image}
                     alt="region-image"
                     width={380}

@@ -28,14 +28,14 @@ export const Footer = async () => {
     const contactRes = await getContactInfo();
     contactData = contactRes.data[0];
     const socialRes = await getSocialLinks();
-    socialData = socialRes?.data || [];
+    socialData = socialRes?.data[0] || [];
 
     // Fallback or mapped data
     const address = contactData?.Location;
 
     const phone = contactData.PhoneNumber1 + (contactData.PhoneNumber2 ? "/" + contactData.PhoneNumber2 : "");
 
-    const email = contactData?.Email ;
+    const email = contactData?.Email;
 
 
     const ContactInfo = [{
@@ -64,24 +64,26 @@ export const Footer = async () => {
         return <Facebook className="size-4" />; // Default
     };
 
-    const SocialLinks = socialData.length > 0 ? socialData.map((item: any) => ({
-        icon: getSocialIcon(item.attributes?.platform || item.platform || "Facebook"),
-        name: item.attributes?.platform || item.platform || "Social",
-        href: item.attributes?.url || item.url || "#"
-    })) : [{
-        icon: <Facebook className="size-4" />,
-        name: "Facebook",
-        href: "https://www.facebook.com/arcglobaltours"
-    }, {
-        icon: <Instagram className="size-4" />,
-        name: "Instagram",
-        href: "https://www.instagram.com/arcglobaltours"
-    }, {
-        icon: <Twitter className="size-4" />,
-        name: "X",
-        href: "https://twitter.com/arcglobaltours"
-    }];
-
+    const facebook = socialData?.Facebook;
+    const instagram = socialData?.Instagram;
+    const twitter = socialData?.Twitter;
+    const socials = [
+        {
+            icon: <Facebook className="size-4" />,
+            name: "Facebook",
+            href: facebook
+        },
+        {
+            icon: <Instagram className="size-4" />,
+            name: "Instagram",
+            href: instagram
+        },
+        {
+            icon: <Twitter className="size-4" />,
+            name: "Twitter",
+            href: twitter
+        }
+    ]
     return (
         <footer className="bg-[#1D4197] text-neutral-100 ">
             <MaxWidthWrapper>
@@ -133,13 +135,23 @@ export const Footer = async () => {
                             Socials
                         </Typography>
                         <div className="flex flex-col gap-1">
-                            {SocialLinks.map((link: any) => (
-                                <Link target="_blank" key={link.name} href={link.href} className="flex items-center gap-3 hover:text-neutral-300 transition-colors">
-                                    {link.icon}
-                                    <Typography styleName="p3" weight="regular" className="text-neutral-100">{link.name}</Typography>
-                                </Link>
-                            ))}
+                            {socials.map((link: any) =>
+                                link.href ? (
+                                    <Link
+                                        target="_blank"
+                                        key={link.name}
+                                        href={link.href}
+                                        className="flex items-center gap-3 hover:text-neutral-300 transition-colors"
+                                    >
+                                        {link.icon}
+                                        <Typography styleName="p3" weight="regular" className="text-neutral-100">
+                                            {link.name}
+                                        </Typography>
+                                    </Link>
+                                ) : null
+                            )}
                         </div>
+
                     </div>
                 </div>
             </MaxWidthWrapper>

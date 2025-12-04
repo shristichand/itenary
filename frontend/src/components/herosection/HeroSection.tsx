@@ -40,19 +40,20 @@ export const HeroSection = () => {
         mutation.mutate(data);
     };
 
-    const title = heroData?.data?.Title || "Discover the World's Hidden Gems";
-    const subtitle = heroData?.data?.Description || "Unforgettable adventures await. Let us guide you to the most breathtaking destinations around the globe.";
+    const title = heroData?.data?.Title;
+    const subtitle = heroData?.data?.Description;
     const imageUrl = heroData?.data?.Image?.url
         ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${heroData.data.Image.url}`
         : "/image/hero/hero.svg";
 
     return (
-        <div className="relative w-screen max-w-screen h-167.5 overflow-x-hidden">
+        <div className="relative w-screen max-w-screen h-167.5 overflow-clip">
             <Image
                 src={imageUrl}
                 alt="hero"
                 width={500}
                 height={500}
+                priority
                 className="w-full h-full object-cover object-bottom translate-y-[.0625rem]"
             />
 

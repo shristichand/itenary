@@ -205,6 +205,18 @@
   body {
     @apply bg-background text-foreground;
     background-color: #F0F0F0;
+    overflow-x: hidden;
+  }
+
+  /* Performance optimizations */
+  img {
+    content-visibility: auto;
+  }
+
+  /* Optimize scrolling performance */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html {
@@ -214,8 +226,12 @@
 
 html {
   font-size: 1vw;
-  scroll-behavior: auto !important;
 }
+
+/* Optimize component rendering during scroll */
+/* body > div {
+  contain: layout style paint;
+} */
 
 @media (max-width: 435px) {
   html {

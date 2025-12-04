@@ -13,6 +13,7 @@ export const Card = ({ image, country, continent, link, description }: { image: 
                     alt="region-image"
                     width={380}
                     height={260}
+                    sizes="(max-width: 768px) 100vw, 380px"
                     className="w-full h-full object-cover rounded-[.5rem]"
                 />
 

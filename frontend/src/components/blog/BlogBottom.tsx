@@ -20,7 +20,7 @@ export const BlogBottom = ({ blog, relatedBlogs = [] }: { blog: any, relatedBlog
 
             <div className="space-y-5">
                 <div className="flex gap-5">
-                    <div className="min-w-20 h-20 ">
+                    <div className="max-w-20 min-w-20 h-20 ">
                         <Image
                             src={attr?.author?.Image?.url ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${attr.author.Image.url}` : "/image/about/team1.png"}
                             alt="author"

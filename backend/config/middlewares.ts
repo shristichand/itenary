@@ -8,20 +8,8 @@ export default [
         useDefaults: true,
         directives: {
           'connect-src': ["'self'", 'https:'],
-          'img-src': [
-            "'self'",
-            'data:',
-            'blob:',
-            'http://localhost:3000',
-            'http://192.168.1.73:3000',
-          ],
-          'media-src': [
-            "'self'",
-            'data:',
-            'blob:',
-            'http://localhost:3000',
-            'http://192.168.1.73:3000',
-          ],
+          'img-src': ["'self'", 'data:', 'blob:', 'http://localhost:3000'], // Add your Next.js URL
+          'media-src': ["'self'", 'data:', 'blob:'],
           upgradeInsecureRequests: null,
         },
       },

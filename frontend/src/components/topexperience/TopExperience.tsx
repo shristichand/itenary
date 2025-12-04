@@ -23,7 +23,7 @@ export const TopExperience = async () => {
                         {/* if(regionData){ */}
 
                         {packageData.map((item: any, index: number) => (
-                            <Card key={index} image={`${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${item?.Image?.url}`} country={item?.Title} continent={item?.Description} link={item?.Slug} />
+                            <Card key={index} image={`${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${item?.Image?.url}`} country={item?.Title} continent={item?.Description} link={`/packages/${item?.Slug}`} />
                         ))}
                         {/* }else{
                         //      {regionData.map((item: any, index: number) => (

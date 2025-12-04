@@ -5,7 +5,7 @@ import { getContactInfo } from "../../api/home";
 
 export const ContactInfo = async () => {
     const contactRes = await getContactInfo();
-    const contactData = contactRes.data[0];
+    const contactData = contactRes?.data[0];
 
     
     return (
@@ -24,7 +24,7 @@ export const ContactInfo = async () => {
                             Location
                         </Typography>
                         <Typography styleName="p3" variant="p" weight="regular" className="text-neutral-800 ">
-                            {contactData.Location}
+                            {contactData?.Location}
                         </Typography>
                     </div>
                 </div>
@@ -38,7 +38,7 @@ export const ContactInfo = async () => {
                             Phone
                         </Typography>
                         <Typography styleName="p3" variant="p" weight="regular" className="text-neutral-800 ">
-                            {contactData.PhoneNumber1}/{contactData.PhoneNumber2}
+                            {contactData?.PhoneNumber1}/{contactData?.PhoneNumber2}
                         </Typography>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ export const ContactInfo = async () => {
                             Email
                         </Typography>
                         <Typography styleName="p3" variant="p" weight="regular" className="text-neutral-800 ">
-                            {contactData.Email}
+                            {contactData?.Email}
                         </Typography>
                     </div>
                 </div>

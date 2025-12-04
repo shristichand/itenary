@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Typography } from "../common/Typography";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useRef } from "react";
 
 const menu = [
   {
@@ -29,7 +30,12 @@ const menu = [
 ];
 
 export const Navbar = () => {
-
+  const handleContactClick = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <div className="w-full z-50 flex justify-between px-15 py-4 h-20 fixed bg-neutral-100">
@@ -66,7 +72,7 @@ export const Navbar = () => {
 
       {/* Button */}
       <div className="w-30 h-10">
-        <Button variant="default">
+        <Button variant="default" onClick={handleContactClick}>
           <Typography styleName="p6" weight="semibold" variant="p" className="text-neutral-100">
             Contact Us
           </Typography>

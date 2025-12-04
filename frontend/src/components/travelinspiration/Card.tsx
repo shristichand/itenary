@@ -12,6 +12,7 @@ export const Card = ({ image, date, name, title, description, slug }: { image: s
                     alt="blogimage"
                     width={500}
                     height={500}
+                    sizes="(max-width: 768px) 100vw, 380px"
                     className="w-95 h-48 rounded-t-[.5rem] object-cover"
                 />
             </div>
