@@ -10,9 +10,9 @@ export const Region = ({ packages }: RegionProps) => {
     return (
         <section>
             <MaxWidthWrapper>
-                <div className="space-y-10 py-10 ">
+                <div className="md:space-y-10 space-y-4 py-10 ">
                     <SubHeadingContainer headingtext="Explore by Region" paragraphtext="Discover handpicked destinations from around the world, each offering unique experiences and unforgettable memories." />
-                    <div className="flex flex-wrap justify-center gap-x-7.5 gap-y-10 ">
+                    <div className="flex flex-wrap justify-center md:gap-x-7.5 md:gap-y-10 gap-4">
                         {packages.length > 0 ? (
                             packages.map((item, index) => {
                                 const attr = item.attributes || item;

@@ -50,17 +50,17 @@ const styles: Record<StyleNameType, StyleType> = {
     // Paragraphs
     p1: { size: "text-[0.625rem]", leading: "leading-[1.125rem]" },
     p2: { size: "text-[0.75rem]", leading: "leading-[1.25rem]" },
-    p3: { size: "text-[0.875rem]", leading: "leading-[1.375rem]" },
+    p3: { size: "text-[0.875rem]", leading: "leading-[1rem] md:leading-[1.375rem]" },
     p4: { size: "text-[1rem]", leading: "leading-[1.5rem]" },
     p5: { size: "text-[1.125rem]", leading: "leading-[1.625rem]" },
-    p6: { size: "text-[1.25rem]", leading: "leading-[1.75rem]" },
+    p6: { size: "text-[.875rem] md:text-[1.25rem]", leading: "leading-[1rem] md:leading-[1.75rem]" },
     p7: { size: "text-[1.5rem]", leading: "leading-[2rem]" },
 
     // Headings
     h1: { size: "text-[1rem]", leading: "leading-[1.5rem]" },
     h2: { size: "text-[1.125rem]", leading: "leading-[1.625rem]" },
-    h3: { size: "text-[1.25rem]", leading: "leading-[1.75rem]" },
-    h4: { size: "text-[1.5rem]", leading: "leading-[2rem]" },
+    h3: { size: "md:text-[1.25rem] text-[.9169rem]", leading: "md:leading-[1.75rem] leading-[1.2831rem]" },
+    h4: { size: "text-base md:text-[1.5rem]", leading: "leading-[2rem]" },
     h5: { size: "text-[2rem]", leading: "leading-[2.5rem]" },
     h6: { size: "text-[2.5rem]", leading: "leading-[3rem]" },
 

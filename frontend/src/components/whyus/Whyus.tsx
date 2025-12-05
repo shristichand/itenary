@@ -26,11 +26,11 @@ const data = [{
 
 export const Whyus = () => {
     return (
-        <MaxWidthWrapper>
+        <MaxWidthWrapper className="max-md:bg-white">
 
-            <div className="space-y-5 py-10">
+            <div className="space-y-5 md:py-10 py-6 ">
                 <SubHeadingContainer headingtext="Why Choose Us" paragraphtext="We go beyond just booking trips. Here's what makes our travel experiences special." />
-                <div className="flex gap-[1.6669rem] ">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[1.6669rem] ">
 
                     {data.map((item, index) => (
                         <Card key={index} title={item.title} subtitle={item.subtitle} icon={item.icon} color={item.color} />

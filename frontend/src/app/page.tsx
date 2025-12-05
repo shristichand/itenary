@@ -9,16 +9,22 @@ import { AboutSection } from "@/components/aboutsection/AboutSection";
 import { ContactSection } from "@/components/contact/ContactSection";
 import { getPackages } from "@/api/package";
 import { getBlogs } from "@/api/blog";
+import { getHeroData } from "@/api/home";
+
+export const revalidate = 60;
 
 export default async function Home() {
-  let packages =  [];
+  let packages = [];
   let blogs = [];
+  let heroData;
 
   try {
     const packagesRes = await getPackages();
     packages = packagesRes?.data || [];
     const blogsRes = await getBlogs();
     blogs = blogsRes?.data || [];
+    const heroRes = await getHeroData();
+    heroData = heroRes?.data || [];
   } catch (error) {
     console.error("Failed to fetch home page data:", error);
   }
@@ -26,7 +32,7 @@ export default async function Home() {
   return (
     <div className=" ">
       <div >
-        <HeroSection />
+        <HeroSection heroData={heroData} />
         <MidSection />
         <AboutSection />
         <Whyus />

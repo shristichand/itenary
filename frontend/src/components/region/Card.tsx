@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 export const Card = ({ image, country, continent, link, description }: { image: string, country: string, continent: string, link: string, description?: string }) => {
     return (
-        <div className="relative w-95 h-100 rounded-[.5rem] group overflow-hidden">
+        <div className="relative md:w-95 w-full md:h-100 h-95 rounded-[.5rem] group overflow-hidden">
             <Link href={link}>
                 <Image
                     src={image}
@@ -25,15 +25,15 @@ export const Card = ({ image, country, continent, link, description }: { image: 
         z-10
     "
                 >
-                    <Typography styleName="p5" weight="semibold" className="text-neutral-100">
+                    <Typography styleName="p5" weight="semibold" className="text-neutral-100 max-md:text-[1.5rem] max-md:[1.5437rem]">
                         {country}
                     </Typography>
-                    <Typography styleName="p3" weight="medium" className="text-neutral-100">
+                    <Typography styleName="p3" weight="medium" className="text-neutral-100 max-md:leading-[1.3062rem]">
                         {continent}
                     </Typography>
 
                     <div className="h-0 overflow-hidden group-hover:h-auto transition-all duration-300 opacity-0 group-hover:opacity-100 pt-2">
-                        <Typography styleName="p3" weight="regular" className="text-neutral-200 line-clamp-2">
+                        <Typography styleName="p3" weight="regular" className="text-neutral-200 line-clamp-2 max-md:leading-5.5">
                             {description}
                         </Typography>
                     </div>

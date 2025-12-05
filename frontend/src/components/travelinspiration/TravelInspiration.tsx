@@ -9,10 +9,10 @@ interface TravelInspirationProps {
 export const TravelInspiration = ({ blogs = [] }: TravelInspirationProps) => {
     return (
         <section>
-            <MaxWidthWrapper>
-                <div className="space-y-5 py-10 ">
+            <MaxWidthWrapper className="max-md:bg-white">
+                <div className="md:space-y-5 md:py-10 py-4">
                     <SubHeadingContainer headingtext="Travel Inspiration" paragraphtext="Real experiences from real travelers who have explored the world with us." />
-                    <div className="flex flex-wrap justify-center gap-x-7.5 gap-y-10 ">
+                    <div className="flex flex-wrap justify-center md:gap-x-7.5 md:gap-y-10 gap-4">
                         {blogs.length > 0 ? (
                             blogs.map((item, index) => {
                                 const attr = item.attributes || item;

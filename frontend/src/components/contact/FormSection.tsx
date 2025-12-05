@@ -37,7 +37,7 @@ export const FormSection = () => {
     };
 
     return (
-        <div className="basis-1/2 h-fit p-5 rounded-[.5rem] shadow-[#00000040] shadow-[0px_4px_20px_0px] space-y-5 bg-neutral-100">
+        <div className="basis-1/2 h-fit md:p-5 rounded-[.5rem] md:shadow-[#00000040] md:shadow-[0px_4px_20px_0px] space-y-5 md:bg-neutral-100">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                 <div className="space-y-1">
                     <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323]">Your Name</Typography>

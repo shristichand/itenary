@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export default function Card2() {
     return (
-        <div className="w-69 h-48 rounded-2xl shadow-[#0c0c0c70] shadow-[0px_4px_10px_-4px]">
+        <div className="md:w-69 md:h-48 w-full h-[10.8125rem] rounded-2xl overflow-hidden shadow-[#0c0c0c70] shadow-[0px_4px_10px_-4px]">
             <Image
                 src="/image/about/layoutImage2.svg"
                 alt="about"
-                width={200}
-                height={200}
-                className="w-69 h-48 rounded-2xl "
+                width={400}
+                height={400}
+                className="w-full h-full object-cover"
             />
         </div>
     );

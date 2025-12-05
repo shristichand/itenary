@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Typography } from "../common/Typography";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../ui/input-group";
@@ -11,18 +12,13 @@ import { heroSchema, HeroFormData } from "./schema";
 import { sendInquiry } from "../../api/inquiry";
 import { getHeroData } from "../../api/home";
 
-export const HeroSection = () => {
+export const HeroSection = ({ heroData }: { heroData: any }) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<HeroFormData>({
         resolver: zodResolver(heroSchema),
-    });
-
-    const { data: heroData } = useQuery({
-        queryKey: ["hero"],
-        queryFn: getHeroData,
     });
 
     const mutation = useMutation({
@@ -40,48 +36,106 @@ export const HeroSection = () => {
         mutation.mutate(data);
     };
 
-    const title = heroData?.data?.Title;
-    const subtitle = heroData?.data?.Description;
-    const imageUrl = heroData?.data?.Image?.url
-        ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${heroData.data.Image.url}`
-        : "/image/hero/hero.svg";
+    const title = heroData?.Title;
+    const subtitle = heroData?.Description;
+
+    // Get images from API or use fallback
+    const heroImages = heroData?.Image?.length > 0
+        ? heroData.Image.map((img: any) => `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${img.url}`)
+        : ["/image/hero/travelheroimage.jpg"];
+
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev: number) => (prev + 1) % heroImages.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [heroImages.length]);
 
     return (
-        <div className="relative w-screen max-w-screen h-167.5 overflow-clip">
-            <Image
-                src={imageUrl}
-                alt="hero"
-                width={500}
-                height={500}
-                priority
-                className="w-full h-full object-cover object-bottom translate-y-[.0625rem]"
-            />
+        <div className="relative w-screen max-w-screen">
+            {/* Image Section */}
+            <div className="relative w-full md:h-167.5 h-[18.6875rem] overflow-hidden">
+                {/* Slider Track */}
+                <div
+                    className="flex w-full h-full transition-transform duration-1000 ease-in-out"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
+                    {heroImages.map((img: string, index: number) => (
+                        <div
+                            key={index}
+                            className="w-full h-full flex-shrink-0 relative"
+                        >
+                            <Image
+                                src={img}
+                                alt={`hero-${index}`}
+                                width={1920}
+                                height={1080}
+                                quality={100}
+                                priority={index === 0}
+                                className="w-full h-full object-cover object-bottom"
+                            />
+                        </div>
+                    ))}
+                </div>
 
-            <div className="w-215 space-y-10  absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-60%]">
-                <div className="flex flex-col  justify-center items-center gap-5">
-                    <div className="w-157.25 space-y-5">
-                        <Typography styleName="d2" weight="bold" variant="p" className="text-neutral-100 max-w-135 text-center">
+                {/* Text Overlay - Centered on Image */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full flex flex-col items-center gap-5 px-4">
+                    <div className="md:w-157.25 md:space-y-5 space-y-[.6094rem]">
+                        <Typography styleName="d2" weight="bold" variant="p" className="max-md:text-[2rem] max-md:leading-[1.9494rem] text-neutral-100 md:max-w-135 text-center">
                             {title}
                         </Typography>
 
-                        <Typography styleName="p5" weight="regular" className="text-neutral-100 max-w-157.25 text-center">
+                        <Typography styleName="p5" weight="regular" className="text-neutral-100 max-w-157.25 text-center max-md:text-[.875rem] max-md:leading-[.7919rem]">
                             {subtitle}
                         </Typography>
                     </div>
                 </div>
 
-                <div >
-                    <div className="w-full  bg-[#F0F0F0] p-5 rounded-[.5rem]">
+                {/* Pagination Dots */}
+                <div className="absolute bottom-10 left-1/2 transform translate-x-[-50%] z-20 flex gap-3">
+                    {heroImages.map((_: string, index: number) => (
+                        <button
+                            key={index}
+                            onClick={() => setCurrentSlide(index)}
+                            className={`rounded-full transition-all duration-300 ${index === currentSlide
+                                ? "w-4 h-4 bg-[#1D4197] opacity-100"
+                                : "w-4 h-4 bg-[#E8E8E8] opacity-50 hover:opacity-75"
+                                }`}
+                            aria-label={`Go to slide ${index + 1}`}
+                        />
+                    ))}
+                </div>
+
+                {/* Curve Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 z-10">
+                    <Image
+                        src="/image/hero/curve.svg"
+                        alt="curve"
+                        width={500}
+                        height={500}
+                        priority
+                        className="w-full h-full object-cover object-bottom translate-y-[.0625rem]"
+                    />
+                </div>
+            </div>
+
+            {/* Search Form Section */}
+            {/* Desktop: Absolute overlay. Mobile: Static block below image. */}
+            <div className="md:absolute md:top-[65%] md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-30 w-full md:w-auto">
+                <div className="w-full md:w-215 px-4 md:px-0 bg-[#F0F0F0] md:bg-transparent pb-10 md:pb-0">
+                    <div className="w-full bg-[#F0F0F0] p-5 rounded-[.5rem]">
                         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
 
-                            <div className="flex gap-5 ">
-                                <div className="w-full flex flex-col gap-2 ">
-                                    <Typography styleName="p3" weight="regular" className="text-neutral-800 ">
+                            <div className="flex flex-col md:flex-row gap-5">
+                                <div className="w-full flex flex-col gap-2">
+                                    <Typography styleName="p3" weight="regular" className="text-neutral-800">
                                         Location
                                     </Typography>
 
                                     <div>
-                                        <InputGroup className="border border-neutral-400 focus-visible:ring-0">
+                                        <InputGroup className="border border-neutral-400 focus-visible:ring-0 bg-white md:bg-transparent">
                                             <InputGroupInput
                                                 placeholder="Where are you going ?"
                                                 className="placeholder:text-neutral-800 placeholder:text-4 placeholder:leading-6"
@@ -90,11 +144,6 @@ export const HeroSection = () => {
                                             <InputGroupAddon>
                                                 <MapPin className="size-6 text-[#1D4197]" />
                                             </InputGroupAddon>
-                                            <InputGroupAddon align="inline-start">
-                                                <InputGroupButton>
-
-                                                </InputGroupButton>
-                                            </InputGroupAddon>
                                         </InputGroup>
                                         {errors.Location && (
                                             <span className="text-red-500 text-sm">{errors.Location.message}</span>
@@ -102,13 +151,13 @@ export const HeroSection = () => {
                                     </div>
                                 </div>
 
-                                <div className="w-full flex flex-col gap-2 ">
-                                    <Typography styleName="p3" weight="regular" className="text-neutral-800 ">
+                                <div className="w-full flex flex-col gap-2">
+                                    <Typography styleName="p3" weight="regular" className="text-neutral-800">
                                         Date
                                     </Typography>
 
                                     <div>
-                                        <InputGroup className="border border-neutral-400 focus-visible:ring-0">
+                                        <InputGroup className="border border-neutral-400 focus-visible:ring-0 bg-white md:bg-transparent">
                                             <InputGroupInput
                                                 type="date"
                                                 placeholder="Select a date"
@@ -118,11 +167,6 @@ export const HeroSection = () => {
                                             <InputGroupAddon>
                                                 <Calendar className="size-6 text-[#1D4197]" />
                                             </InputGroupAddon>
-                                            <InputGroupAddon align="inline-start">
-                                                <InputGroupButton>
-
-                                                </InputGroupButton>
-                                            </InputGroupAddon>
                                         </InputGroup>
                                         {errors.Date && (
                                             <span className="text-red-500 text-sm">{errors.Date.message}</span>
@@ -131,9 +175,8 @@ export const HeroSection = () => {
                                 </div>
                             </div>
 
-                            <div className="flex justify-end ">
-                                <Button type="submit" variant="default" className="px-5! flex! items-center!" disabled={mutation.isPending}>
-                                    <Search className="w-5" />
+                            <div className="flex justify-end">
+                                <Button type="submit" variant="default" className="w-full md:w-auto px-5! flex! items-center! justify-center" disabled={mutation.isPending}>
                                     <Typography styleName="p3" weight="semibold" className="text-neutral-100">
                                         {mutation.isPending ? "Searching..." : "Search"}
                                     </Typography>

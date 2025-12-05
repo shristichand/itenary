@@ -3,7 +3,7 @@ import api from "../../lib/api";
 export const getHeroData = async () => {
     try {
         const response = await api.get("/herosection?populate=*");
-        console.log(response.data,"Hero")
+        console.log(response.data, "Hero")
         return response.data;
     } catch (error) {
         console.error("Error fetching hero data:", error);

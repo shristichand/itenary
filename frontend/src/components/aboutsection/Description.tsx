@@ -10,13 +10,14 @@ export const Description = ({ text, description }: { text: string, description: 
             </div>
 
             <div>
-                <Typography styleName="sub6" weight="semibold" className="text-neutral-1000">
+                <Typography styleName="sub6" weight="semibold" className="text-neutral-1000 max-md:text-[1.5rem]
+                max-md:leading-12">
                     {text}
                 </Typography>
             </div>
 
             <div>
-                <Typography styleName="p4" weight="regular" className="text-[#242323]">
+                <Typography styleName="p4" weight="regular" className="text-[#242323] max-md:text-[1rem] max-md:leading-6">
                     <span dangerouslySetInnerHTML={{ __html: description }}></span>
                 </Typography>
             </div>
@@ -35,7 +36,7 @@ export const Description = ({ text, description }: { text: string, description: 
                     <Typography styleName="p4" weight="medium" className="text-[#242323] ">
                         Global Expertise
                     </Typography>
-                    <Typography styleName="p3" weight="regular" className="text-neutral-800 ">
+                    <Typography styleName="p3" weight="regular" className="text-neutral-800 max-md:leading-5.5">
                         Access to exclusive destinations and local insights worldwide
                     </Typography>
                 </div>
@@ -55,7 +56,7 @@ export const Description = ({ text, description }: { text: string, description: 
                     <Typography styleName="p4" weight="medium" className="text-[#242323] ">
                         Personalized Service
                     </Typography>
-                    <Typography styleName="p3" weight="regular" className="text-neutral-800 ">
+                    <Typography styleName="p3" weight="regular" className="text-neutral-800 max-md:leading-5.5">
                         Every journey is tailored to your unique preferences and dreams                    </Typography>
                 </div>
             </div>

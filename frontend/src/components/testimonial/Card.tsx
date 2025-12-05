@@ -4,19 +4,19 @@ import Image from "next/image"
 
 export const Card = ({ testimonial, star, image, name, location }: { testimonial: string, star: number, image: string, name: string, location: string }) => {
     return (
-        <div className="w-95 h-fit p-5 bg-neutral-100 flex flex-col gap-2 rounded-[.5rem] shadow-[#00000040] shadow-[0px_4px_20px_0px] ">
+        <div className="md:w-95 w-75.5 h-fit md:p-5 p-4 bg-neutral-100 flex flex-col gap-2 rounded-[.5rem] md:shadow-[#00000040] md:shadow-[0px_4px_20px_0px] ">
             {/* star section */}
             <div className="flex gap-1">
                 {Array.from({ length: star }).map((_, i) => (
-                    <Star key={i} className="size-4 fill-primary-700 text-primary-700" />
+                    <Star key={i} className="md:size-4 size-5 fill-primary-700 text-primary-700" />
                 ))}
                 {Array.from({ length: 5 - star }).map((_, i) => (
-                    <Star key={i} className="size-4 fill-neutral-300 text-neutral-300" />
+                    <Star key={i} className="md:size-4 size-5 fill-neutral-300 text-neutral-300" />
                 ))}
             </div>
 
             <div>
-                <Typography styleName="p3" weight="regular" className="text-[#242323] text-justify">
+                <Typography styleName="p3" weight="regular" className="text-[#242323] text-justify max-md:leading-5.5">
                     {testimonial}
                 </Typography>
             </div>

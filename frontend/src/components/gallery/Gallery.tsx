@@ -30,7 +30,7 @@ export const Gallery = async () => {
 
     return (
         <MaxWidthWrapper>
-            <div className="grid grid-cols-3 gap-x-7.5 gap-y-10">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-x-7.5 md:gap-y-10 gap-y-4">
                 {allImages.length > 0 ? (
                     allImages.map((img, index) => (
                         <Card key={index} img={img} />

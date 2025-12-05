@@ -43,7 +43,7 @@ export default {
                 if (contactInfo.Email) contextString += `Email: ${contactInfo.Email}\n`;
             }
 
-            contextString += "\nOnly provide information about these packages and the company. Do not give information about anything else.";
+            contextString += "\nYou are a helpful travel assistant for Arc Global Travels. You can answer greetings politely (e.g., 'Hello! How can I help you today?'). For inquiries about travel, packages, or the company, use the provided context. If the user asks about something unrelated to travel or the company, politely steer them back to our services.";
 
             // 4. Inject Prompt
             const finalMessage = `${contextString}\n\nUser Query: ${message}`;

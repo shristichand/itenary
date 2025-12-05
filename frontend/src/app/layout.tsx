@@ -44,7 +44,7 @@ export default function RootLayout({
       >
         <QueryProvider>
           <Navbar />
-          <div className="pt-20 bg-[#F0F0F0]">
+          <div className="md:pt-20 pt-[3.2294rem] bg-[#F0F0F0] overflow-x-hidden"> 
             {children}
           </div>
           <ChatWidget />

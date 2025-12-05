@@ -87,9 +87,9 @@ export const Footer = async () => {
     return (
         <footer className="bg-[#1D4197] text-neutral-100 ">
             <MaxWidthWrapper>
-                <div className="flex justify-between py-10 h-54">
+                <div className="flex flex-col md:flex-row justify-between md:py-10 p-4 h-auto md:h-54 gap-6 md:gap-0 relative ">
                     {/* Column 1: Brand */}
-                    <div className="flex flex-col gap-3 w-67.5">
+                    <div className="flex flex-col  gap-3 w-full md:w-67.5">
                         <Typography styleName="p6" weight="semibold" className="text-neutral-100">
                             A.r.c. Global Tours & Travels
                         </Typography>
@@ -98,43 +98,45 @@ export const Footer = async () => {
                         </Typography>
                     </div>
 
-                    {/* Column 2: Quick Links */}
-                    <div className="flex flex-col gap-3">
-                        <Typography styleName="p6" weight="semibold" className="text-neutral-100">
-                            Quick Links
-                        </Typography>
-                        <div className="flex flex-col gap-1">
-                            {Links.map((link) => (
-                                <Link key={link.name} href={link.href} className="hover:text-neutral-300 transition-colors">
-                                    <Typography styleName="p3" weight="regular" className="text-neutral-100">{link.name}</Typography>
-                                </Link>
-                            ))}
+                    <div className="flex flex-row gap-[1.0625rem] md:gap-20">
+                        {/* Column 2: Quick Links */}
+                        <div className="flex flex-col gap-2 md:gap-3">
+                            <Typography styleName="p6" weight="semibold" className="max-md:text-[.875rem] max-md:leading-6 text-neutral-100">
+                                Quick Links
+                            </Typography>
+                            <div className="flex flex-col gap-1">
+                                {Links.map((link) => (
+                                    <Link key={link.name} href={link.href} className="hover:text-neutral-300 transition-colors">
+                                        <Typography styleName="p3" weight="regular" className="text-neutral-100 max-md:leading-5.5">{link.name}</Typography>
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Column 3: Contact Us */}
-                    <div className="flex flex-col gap-3">
-                        <Typography styleName="p6" weight="semibold" className="text-neutral-100">
-                            Contact Us
-                        </Typography>
-                        <div className="flex flex-col gap-1">
-                            {ContactInfo.map((info) => (
-                                <div key={info.name} className="flex items-center gap-3">
-                                    {info.icon}
-                                    <Typography styleName="p3" weight="regular" className="text-neutral-100">
-                                        <Link target="_blank" href={info.href}>{info.value}</Link>
-                                    </Typography>
-                                </div>
-                            ))}
+                        {/* Column 3: Contact Us */}
+                        <div className="flex flex-col gap-3">
+                            <Typography styleName="p6" weight="semibold" className="max-md:text-[.875rem] max-md:leading-6 text-neutral-100">
+                                Contact Us
+                            </Typography>
+                            <div className="flex flex-col gap-1">
+                                {ContactInfo.map((info) => (
+                                    <div key={info.name} className="flex items-center md:gap-3 gap-1 whitespace-nowrap ">
+                                        {info.icon}
+                                        <Typography styleName="p3" weight="regular" className="text-neutral-100 ">
+                                            <Link target="_blank" href={info.href}>{info.value}</Link>
+                                        </Typography>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
                     {/* Column 4: Socials */}
-                    <div className="flex flex-col gap-3">
-                        <Typography styleName="p6" weight="semibold" className="text-neutral-100">
+                    <div className="flex flex-col gap-3 md:items-start items-end md:relative ">
+                        <Typography styleName="p6" weight="semibold" className="text-neutral-100 hidden md:block">
                             Socials
                         </Typography>
-                        <div className="flex flex-col gap-1">
+                        <div className="flex md:flex-col flex-row gap-[1.0938rem] md:gap-1">
                             {socials.map((link: any) =>
                                 link.href ? (
                                     <Link
@@ -143,8 +145,13 @@ export const Footer = async () => {
                                         href={link.href}
                                         className="flex items-center gap-3 hover:text-neutral-300 transition-colors"
                                     >
-                                        {link.icon}
-                                        <Typography styleName="p3" weight="regular" className="text-neutral-100">
+                                        <div className="md:size-4 size-8">
+                                            {/* Clone element to adjust size for mobile if needed, or just rely on CSS */}
+                                            <div className="[&>svg]:w-full [&>svg]:h-full">
+                                                {link.icon}
+                                            </div>
+                                        </div>
+                                        <Typography styleName="p3" weight="regular" className="text-neutral-100 hidden md:block">
                                             {link.name}
                                         </Typography>
                                     </Link>
@@ -159,7 +166,7 @@ export const Footer = async () => {
             {/* Bottom Bar */}
             <div className="bg-[#112556] py-2 h-9.5">
                 <MaxWidthWrapper>
-                    <Typography styleName="p3" weight="regular" className="text-center text-neutral-100">
+                    <Typography styleName="p3" weight="regular" className="max-md:text-[.625rem] max-md:leading-5 text-center text-neutral-100">
                         Copyright © {currentYear} A.r.c. Global Tours & Travels. All rights reserved.
                     </Typography>
                 </MaxWidthWrapper>

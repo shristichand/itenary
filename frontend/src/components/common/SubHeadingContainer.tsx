@@ -6,7 +6,7 @@ export const SubHeadingContainer = ({headingtext, paragraphtext, left}: {heading
         <div className={`flex flex-col justify-center items-center ${left && 'text-left items-start'}`}>
             <SubHeading text={headingtext} />
             <div className="p-[.625rem] max-w-199.25 ">
-            <Typography styleName="p5" weight="regular" className="text-neutral-900 text-center">
+            <Typography styleName="p5" weight="regular" className="text-neutral-900 text-center max-md:text-[.875rem] max-md:leading-[1.0425rem]">
                 {paragraphtext}
             </Typography>
             </div>
