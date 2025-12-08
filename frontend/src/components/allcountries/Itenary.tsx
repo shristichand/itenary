@@ -7,7 +7,7 @@ interface ItenaryProps {
 
 export const Itenary = ({ day, lists }: ItenaryProps) => {
   return (
-    <div className="w-187.5 space-y-2 rounded-[.5rem] p-5 bg-neutral-100">
+    <div className="w-full md:w-187.5 space-y-2 rounded-[.5rem] p-5 bg-neutral-100">
       <Typography
         styleName="p3"
         weight="medium"

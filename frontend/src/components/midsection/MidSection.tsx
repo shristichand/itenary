@@ -19,7 +19,7 @@ export const MidSection = async () => {
 
     return (
         <MaxWidthWrapper>
-            <div className="grid grid-cols-2 md:grid-cols-4 md:gap-[1.6669rem] gap-4 py-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 md:gap-[1.6669rem] gap-4 md:py-10">
                 {stats.map((card: any, index: number) => (
                     <Card
                         key={index}

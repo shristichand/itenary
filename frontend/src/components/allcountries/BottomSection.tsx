@@ -20,7 +20,7 @@ export const BottomSection = ({ packageId }: BottomSectionProps) => {
     const reviews = reviewsData?.data || [];
 
     return (
-        <div className="pt-5 space-y-5">
+        <div className="pt-5 space-y-5  md:max-w-300 md:mx-auto max-md:px-4">
             <div className="flex justify-between items-center">
                 <Typography styleName="p6" variant="h1" weight="semibold" className="text-[#242323]">
                     Traveler Reviews
@@ -33,8 +33,8 @@ export const BottomSection = ({ packageId }: BottomSectionProps) => {
                 </Link>
             </div>
 
-            <div className="flex gap-10 justify-between">
-                <div className="space-y-5">
+            <div className="flex  gap-10 justify-between max-md:flex max-md:flex-col">
+                <div className=" space-y-5 ">
                     {reviews.length > 0 ? (
                         reviews.map((review: any, index: number) => (
                             <Review
@@ -53,7 +53,12 @@ export const BottomSection = ({ packageId }: BottomSectionProps) => {
                         </Typography>
                     )}
                 </div>
-                <SendReview packageId={packageId} />
+
+                <div>
+
+                    <SendReview packageId={packageId} />
+                </div>
+
             </div>
         </div>
     );

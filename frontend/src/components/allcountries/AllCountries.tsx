@@ -48,36 +48,40 @@ export const AllCountries = ({ packages = [] }: AllCountriesProps) => {
 
     return (
         <MaxWidthWrapper>
-            <div className="space-y-10 py-10 ">
-                <div className="flex justify-between items-center">
-                    <div className="text-left!">
+            <div className="md:space-y-10 space-y-2 md:py-10 py-4">
+                <div className="flex flex-col md:flex-row flex-wrap justify-between items-center gap-4 md:gap-0">
+                    <div className="max-md:hidden w-full md:w-auto text-center md:text-left">
                         <SubHeadingContainer left headingtext="Tours in all countries" paragraphtext="Discover our curated tour packages of all countries" />
                     </div>
 
+                    <div className="md:hidden w-full md:w-auto text-center md:text-left">
+                        <SubHeadingContainer headingtext="Tours in all countries" paragraphtext="Discover our curated tour packages of all countries" />
+                    </div>
 
-                    <div className="flex relative gap-5 items-center">
+
+                    <div className="w-full md:w-auto flex relative gap-5 items-center justify-end md:justify-start">
                         <div className="flex gap-[.625rem]">
                             <Funnel className="size-6" />
                             <Typography
                                 styleName="p5"
                                 weight="regular"
                                 variant="p"
-                                className="text-[#000000]"
+                                className="text-[#000000] max-md:hidden"
                             >
                                 Filter by Country:
                             </Typography>
                         </div>
                         <div className="flex gap-5 items-center relative">
                             <div
-                                className={`flex items-center gap-2  cursor-pointer bg-[#E8E8E8] px-2 py-2 min-w-[200px] justify-between ${isOpen ? 'rounded-t-[.25rem]  rounded-b-none border border-[#E8E8E8]' : 'rounded-[.25rem] border border-neutral-700'}`}
+                                className={`flex items-center gap-2 cursor-pointer bg-transparent md:bg-[#E8E8E8] px-2 py-[.4063rem] md:py-2 md:min-w-[200px] justify-between ${isOpen ? 'rounded-t-[.25rem] rounded-b-none border border-[#E8E8E8]' : 'rounded-[.25rem] border border-neutral-700'}`}
                                 onClick={toggleDropdown}
                             >
                                 <div className="flex items-center gap-2">
-                                    <Typography styleName="p5" weight="regular" variant="p" className="text-[#000000]">
+                                    <Typography styleName="p5" weight="regular" variant="p" className="text-[#000000] max-md:text-[.875rem] max-md:leading-[1.1875rem]">
                                         {selectedCountry}
                                     </Typography>
                                 </div>
-                                <ChevronDown className={`w-6 h-6 stroke-[.125rem] text-[#000000] `} />
+                                <ChevronDown className={`w-4 md:w-6 md:h-6 stroke-[.125rem] text-[#000000] `} />
                             </div>
 
                             {isOpen && (
@@ -95,6 +99,7 @@ export const AllCountries = ({ packages = [] }: AllCountriesProps) => {
                                                 styleName="p5"
                                                 weight="regular"
                                                 variant="p"
+                                                className="max-md:text-[.875rem] max-md:leading-[1.1875rem]"
                                             >
                                                 {country}
                                             </Typography>
@@ -106,7 +111,7 @@ export const AllCountries = ({ packages = [] }: AllCountriesProps) => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[1.875rem] gap-y-10">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-x-[1.875rem] md:gap-y-10">
                     {displayPackages.length > 0 ? (
                         displayPackages.map((item, index) => {
                             const attr = item.attributes || item;

@@ -5,7 +5,8 @@ import { Typography } from "../common/Typography";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Home, Building2, MapPin, Image as ImageIcon, Newspaper, ChevronLeft } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { ArrowLeft, Menu, X, Home, Building2, MapPin, Image as ImageIcon, Newspaper, ChevronLeft } from "lucide-react";
 
 const menu = [
   {
@@ -37,6 +38,8 @@ const menu = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const handleContactClick = () => {
     const contactSection = document.getElementById('contact');
@@ -46,28 +49,38 @@ export const Navbar = () => {
     }
   };
 
+  const isDetailPage = (pathname.startsWith('/blogs/') && pathname.split('/').length > 2) ||
+    (pathname.startsWith('/packages/') && pathname.split('/').length > 2);
+
   return (
     <>
       <div className="w-full z-50 flex justify-between px-5 md:px-15 py-4 md:h-20 h-[3.2294rem] fixed bg-neutral-100 items-center ">
-        {/* Logo */}
-        <Link href="/">
-          <div className="flex items-center gap-1">
-            <div className="md:w-13 md:h-10 w-[2.3781rem] h-[1.8375rem]">
-              <Image
-                src="/image/logo/logo.svg"
-                alt="Logo"
-                width={100}
-                height={20}
-                className="w-full h-full object-cover"
-              />
+        <div className="flex items-center gap-2">
+          {isDetailPage && (
+            <button onClick={() => router.back()} className="md:hidden">
+              <ChevronLeft className="w-6 text-primary-700" />
+            </button>
+          )}
+          {/* Logo */}
+          <Link href="/">
+            <div className="flex items-center gap-1">
+              <div className="md:w-13 md:h-10 w-[2.3781rem] h-[1.8375rem]">
+                <Image
+                  src="/image/logo/logo.svg"
+                  alt="Logo"
+                  width={100}
+                  height={20}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="md:p-[.625rem] p-[.4581rem]">
+                <Typography styleName="h3" weight="semibold" variant="p" className="text-primary-700">
+                  A.R.C GLOBAL
+                </Typography>
+              </div>
             </div>
-            <div className="md:p-[.625rem] p-[.4581rem]">
-              <Typography styleName="h3" weight="semibold" variant="p" className="text-primary-700">
-                ARC GLOBAL
-              </Typography>
-            </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-10 justify-center items-center">
@@ -92,7 +105,7 @@ export const Navbar = () => {
         {/* Mobile Hamburger */}
         <div className="md:hidden">
           <button onClick={() => setIsOpen(true)}>
-            <Menu className="w-7.75 h-6 text-neutral-1000" />
+            <Menu className="w-7.75 h-6 stroke-[.125rem] text-[#000000]" />
           </button>
         </div>
       </div>
@@ -135,10 +148,10 @@ export const Navbar = () => {
               >
                 <div className="flex items-center gap-4 py-[.625rem] hover:bg-neutral-200  border-b border-[#FFFFFF]">
 
-                <item.icon className="size-5 text-[#242323] stroke-[.125rem]" />
-                <p className="text-[1.25rem] leading-8.75 text-[#242323]">
-                  {item.name}
-                </p>
+                  <item.icon className="size-5 text-[#242323] stroke-[.125rem]" />
+                  <p className="text-[1.25rem] leading-8.75 text-[#242323]">
+                    {item.name}
+                  </p>
                 </div>
               </Link>
             ))}

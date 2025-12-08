@@ -5,24 +5,26 @@ import { Button } from "../ui/button"
 
 export const Last = () => {
     return (
-        <MaxWidthWrapper>
-            <div className="w-full mb-10 rounded-[.5rem] p-5 bg-gradient-to-r from-[#0D47A1] to-[#666666] space-y-1">
-                <Typography styleName="h6" weight="semibold" variant="p" className="text-[#FFFFFF] text-center">
-                    Ready to Start Your Adventure?
-                </Typography>
+        <div className="max-md:bg-white max-md:pt-10 max-md:pb-[3.5rem]">
+            <div className="w-full md:w-[75rem] md:mx-auto mb-10 rounded-[.5rem] p-5 bg-gradient-to-r from-[#0D47A1] to-[#666666] space-y-1 ">
+                <div className="max-md:w-full  ">
+                    <Typography styleName="h6" weight="semibold" variant="p" className="text-[#FFFFFF] text-center max-md:text-[2rem] max-md:leading-[3rem]">
+                        Ready to Start Your Adventure?
+                    </Typography>
+                </div>
                 <div className="py-[.625rem]">
-                    <Typography styleName="p5" weight="regular" variant="p" className="text-[#FFFFFF] text-center">
+                    <Typography styleName="p5" weight="regular" variant="p" className="text-[#FFFFFF] text-center max-md:text-[.875rem] max-md:leading-[1rem]">
                         Join thousands of satisfied travelers who have discovered the world with us. Let's create your perfect journey together.
                     </Typography>
                 </div>
 
-                <div className="mx-auto w-fit flex gap-10">
+                <div className="max-md:pt-4 mx-auto w-full md:w-fit grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10">
                     <Button
                         variant="default"
-                        className="py-[.5625rem] cursor-pointer px-5"
+                        className="py-[.5625rem] max-md:h-10 cursor-pointer px-5"
 
                     >
-                        <Typography styleName="p3" weight="semibold" variant="p" className="text-[#FFFFFF]">
+                        <Typography styleName="p3" weight="semibold" variant="p" className="text-[#FFFFFF] max-md:leading-[1.375rem]">
                             START EXPLORING
                         </Typography>
                     </Button>
@@ -30,10 +32,10 @@ export const Last = () => {
                     <Link href="/packages">
                         <Button
                             variant="default"
-                            className="py-[.5625rem] cursor-pointer px-5 bg-transparent border-2 border-primary-700"
+                            className="mx-auto w-full py-[.5625rem] max-md:h-10 cursor-pointer px-5 bg-transparent border-2 border-primary-700"
 
                         >
-                            <Typography styleName="p3" weight="semibold" variant="p" className="text-[#FFFFFF] ">
+                            <Typography styleName="p3" weight="semibold" variant="p" className="text-[#FFFFFF] max-md:leading-[1.375rem]">
                                 VIEW PACKAGES
                             </Typography>
                         </Button>
@@ -41,6 +43,6 @@ export const Last = () => {
                 </div>
 
             </div >
-        </MaxWidthWrapper>
+        </div>
     )
 }

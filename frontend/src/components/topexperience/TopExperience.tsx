@@ -16,8 +16,8 @@ export const TopExperience = async () => {
     }
     return (
         <section>
-            <MaxWidthWrapper>
-                <div className="space-y-10 py-10 ">
+            <MaxWidthWrapper className="max-md:bg-white">
+                <div className="space-y-4 md:space-y-10 py-4 md:py-10 ">
                     <SubHeadingContainer headingtext="Our Top Experiences" paragraphtext="Carefully curated tour packages designed to showcase the best each destination has to offer." />
                     <div className="flex flex-wrap justify-center gap-x-7.5 gap-y-10 ">
                         {/* if(regionData){ */}

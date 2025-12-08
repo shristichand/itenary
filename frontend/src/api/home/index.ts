@@ -28,6 +28,15 @@ export const getSocialLinks = async () => {
     }
 };
 
+export const getTeamData = async () => {
+    try {
+        const response = await api.get("/teams?populate=* ");
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching team data:", error);
+    }
+};
+
 export const getStatData = async () => {
     try {
         const response = await api.get("/stats?populate=* ");

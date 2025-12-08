@@ -12,7 +12,7 @@ export default async function Destination() {
         console.error("Failed to fetch home page data:", error);
       }
     return (
-        <div>
+        <div className="max-md:pb-[18.0831rem]">
             <Region packages={packages} />
             <TopExperience />
         </div>

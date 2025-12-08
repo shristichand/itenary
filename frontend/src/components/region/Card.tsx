@@ -21,7 +21,10 @@ export const Card = ({ image, country, continent, link, description }: { image: 
                     className="
         absolute bottom-0 left-0 p-5 
         transition-all duration-300 
-        group-hover:-translate-y-15
+        -translate-y-15
+
+        md:translate-y-0
+        md:group-hover:-translate-y-15
         z-10
     "
                 >
@@ -32,7 +35,7 @@ export const Card = ({ image, country, continent, link, description }: { image: 
                         {continent}
                     </Typography>
 
-                    <div className="h-0 overflow-hidden group-hover:h-auto transition-all duration-300 opacity-0 group-hover:opacity-100 pt-2">
+                    <div className="h-auto opacity-100 md:h-0 md:overflow-hidden md:group-hover:h-auto transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 pt-2">
                         <Typography styleName="p3" weight="regular" className="text-neutral-200 line-clamp-2 max-md:leading-5.5">
                             {description}
                         </Typography>
@@ -44,7 +47,8 @@ export const Card = ({ image, country, continent, link, description }: { image: 
             </Link>
             <div className="
                     absolute inset-0 top- left-0 p-5
-                    bg-black/40 opacity-0 group-hover:opacity-100 
+                    opacity-100 bg-black/40
+                    md:bg-black/40 md:opacity-0 md:group-hover:opacity-100 
                     transition-opacity duration-300 z-20
                 ">
                 <div className="absolute bottom-0 right-0 p-5 z-[99]">

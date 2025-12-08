@@ -94,7 +94,7 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                 </div>
 
                 {/* Pagination Dots */}
-                <div className="absolute bottom-10 left-1/2 transform translate-x-[-50%] z-20 flex gap-3">
+                <div className="hidden md:flex absolute bottom-10 left-1/2 transform translate-x-[-50%] z-20 gap-3">
                     {heroImages.map((_: string, index: number) => (
                         <button
                             key={index}
@@ -118,6 +118,7 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                         priority
                         className="w-full h-full object-cover object-bottom translate-y-[.0625rem]"
                     />
+
                 </div>
             </div>
 
@@ -125,17 +126,33 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
             {/* Desktop: Absolute overlay. Mobile: Static block below image. */}
             <div className="md:absolute md:top-[65%] md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-30 w-full md:w-auto">
                 <div className="w-full md:w-215 px-4 md:px-0 bg-[#F0F0F0] md:bg-transparent pb-10 md:pb-0">
-                    <div className="w-full bg-[#F0F0F0] p-5 rounded-[.5rem]">
+
+                    {/* Pagination Dots - Mobile Below Image */}
+                    <div className="md:hidden flex justify-center py-4 gap-3">
+                        {heroImages.map((_: string, index: number) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentSlide(index)}
+                                className={`rounded-full transition-all duration-300 ${index === currentSlide
+                                    ? "w-2 h-2 bg-[#1D4197] opacity-100"
+                                    : "w-2 h-2 bg-[#D9D9D9] opacity-100 hover:opacity-75"
+                                    }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+
+                    <div className="w-full bg-[#F0F0F0] md:p-5 rounded-[.5rem]">
                         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
 
-                            <div className="flex flex-col md:flex-row gap-5">
+                            <div className="flex flex-col md:flex-row md:gap-5">
                                 <div className="w-full flex flex-col gap-2">
-                                    <Typography styleName="p3" weight="regular" className="text-neutral-800">
+                                    <Typography styleName="p3" weight="regular" className="text-neutral-800 max-md:leading-[1.375rem]">
                                         Location
                                     </Typography>
 
                                     <div>
-                                        <InputGroup className="border border-neutral-400 focus-visible:ring-0 bg-white md:bg-transparent">
+                                        <InputGroup className="border border-neutral-400 h-10 rounded-[.5rem] focus-visible:ring-0 bg-transparent">
                                             <InputGroupInput
                                                 placeholder="Where are you going ?"
                                                 className="placeholder:text-neutral-800 placeholder:text-4 placeholder:leading-6"
@@ -152,12 +169,12 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                                 </div>
 
                                 <div className="w-full flex flex-col gap-2">
-                                    <Typography styleName="p3" weight="regular" className="text-neutral-800">
+                                    <Typography styleName="p3" weight="regular" className="text-neutral-800 max-md:leading-[1.375rem]">
                                         Date
                                     </Typography>
 
                                     <div>
-                                        <InputGroup className="border border-neutral-400 focus-visible:ring-0 bg-white md:bg-transparent">
+                                        <InputGroup className="border border-neutral-400 h-10 focus-visible:ring-0 bg-transparent">
                                             <InputGroupInput
                                                 type="date"
                                                 placeholder="Select a date"
@@ -176,8 +193,8 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                             </div>
 
                             <div className="flex justify-end">
-                                <Button type="submit" variant="default" className="w-full md:w-auto px-5! flex! items-center! justify-center" disabled={mutation.isPending}>
-                                    <Typography styleName="p3" weight="semibold" className="text-neutral-100">
+                                <Button type="submit" variant="default" className="w-full h-10 md:w-auto px-5! flex! items-center! justify-center" disabled={mutation.isPending}>
+                                    <Typography styleName="p3" weight="semibold" className="text-neutral-100 max-md:leading-[1.375rem]">
                                         {mutation.isPending ? "Searching..." : "Search"}
                                     </Typography>
                                 </Button>

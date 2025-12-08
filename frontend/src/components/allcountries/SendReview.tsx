@@ -56,31 +56,27 @@ export const SendReview = ({ packageId }: { packageId: string }) => {
     };
 
     return (
-        <div className="w-140 h-fit space-y-5 bg-neutral-100 py-10 px-5 rounded-[.5rem]">
-            <Typography styleName="p6" weight="semibold" variant="h1" className="text-[#242323]">
+        <div className="w-full md:w-140 h-fit space-y-5 bg-neutral-100 py-10 px-4 md:px-5 rounded-[.5rem]">
+            <Typography styleName="p6" weight="semibold" variant="h1" className="text-[#242323] max-md:text-[1.125rem] max-md:leading-[1.75rem]">
                 Leave a Review
             </Typography>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                <div className="flex gap-5">
+                <div className="flex gap-5 max-md:flex max-md:flex-col">
                     <div className="space-y-1 w-full">
                         <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Name</Typography>
-                        <Input placeholder="Enter your name" {...register("Name")} />
+                        <Input className="max-md:h-10 w-full" placeholder="Enter your name" {...register("Name")} />
                         {errors.Name && <span className="text-red-500 text-xs">{errors.Name.message}</span>}
                     </div>
 
                     <div className="space-y-1 w-full">
-                        <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Email</Typography>
-                        <Input placeholder="Enter your email" {...register("Email")} />
-                        {errors.Email && <span className="text-red-500 text-xs">{errors.Email.message}</span>}
+                        <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Location</Typography>
+                        <Input className="max-md:h-10 w-full" placeholder="Enter your location" {...register("Location")} />
+                        {errors.Location && <span className="text-red-500 text-xs">{errors.Location.message}</span>}
                     </div>
                 </div>
 
-                <div className="space-y-1">
-                    <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Location</Typography>
-                    <Input placeholder="Enter your location" {...register("Location")} />
-                    {errors.Location && <span className="text-red-500 text-xs">{errors.Location.message}</span>}
-                </div>
+
 
                 <div className="space-y-1">
                     <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Ratings</Typography>
@@ -106,11 +102,11 @@ export const SendReview = ({ packageId }: { packageId: string }) => {
 
                 <div className="space-y-1">
                     <Typography styleName="p5" variant="p" weight="medium" className="text-[#242323]">Your Reviews</Typography>
-                    <Textarea placeholder="Enter your review" className="resize-none" {...register("Review")} />
+                    <Textarea className="max-md:h-10 resize-none" placeholder="Enter your review"{...register("Review")} />
                     {errors.Review && <span className="text-red-500 text-xs">{errors.Review.message}</span>}
                 </div>
 
-                <Button type="submit" variant="default" className="w-full py-[.5625rem] px-[12.7188rem]" disabled={mutation.isPending}>
+                <Button type="submit" variant="default" className="w-full py-[.5625rem] px-[12.7188rem] max-md:h-10 cursor-pointer" disabled={mutation.isPending}>
                     <Typography styleName="p3" variant="p" weight="semibold" className="text-neutral-100">
                         {mutation.isPending ? "Sending..." : "Send Review"}
                     </Typography>

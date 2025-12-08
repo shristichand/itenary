@@ -5,7 +5,7 @@ import { ImageLayout } from "./ImageLayout";
 export const AboutSection = () => {
     return (
         <MaxWidthWrapper>
-            <div className="flex flex-col md:flex-row gap-10 py-10">
+            <div className="flex flex-col md:flex-row gap-10 py-[1rem] md:py-10">
                 <ImageLayout />
                 <Description text="Your Journey, Our Expertise" description="For over 15 years, A.r.c. Global Tours & Travels  has been crafting unforgettable travel experiences for adventurers around the globe. We believe that travel is more than just visiting places; it's about creating stories that last a lifetime.
 <br/>

@@ -4,7 +4,7 @@ import { Typography } from "../common/Typography";
 
 export const Review = ({ star, date, img, name, location, review }: { star: number, date: string, img: string, name: string, location: string, review: string }) => {
     return (
-        <div className="w-[37.5rem] space-y-2 p-5 rounded-[.5rem] bg-neutral-100">
+        <div className=" w-full md:w-[37.5rem] space-y-2 p-5 rounded-[.5rem] bg-neutral-100">
             <div className="flex justify-between items-center">
 
                 <div className="flex gap-5">
@@ -30,7 +30,7 @@ export const Review = ({ star, date, img, name, location, review }: { star: numb
                     </div>
                 </div>
 
-                <div className="space-y-1">
+                <div className=" space-y-1">
                     <div className="flex gap-1">
                         {Array.from({ length: star }).map((_, i) => (
                             <Star key={i} className="size-5 fill-primary-700 text-primary-700" />

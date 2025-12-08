@@ -28,10 +28,10 @@ const cardData = [
 
 export const OurValues = () => {
     return (
-        <MaxWidthWrapper>
-            <div className="w-full space-y-5">
+        <MaxWidthWrapper className="max-md:bg-white">
+            <div className="w-full max-md:pt-10 max-md:pb-[3.5rem] space-y-5">
                 <div>
-                    <div className="mx-auto w-fit  ">
+                    <div className="mx-auto w-fit max-md:pt-4 ">
                         <SubHeading text="Our Values" />
                     </div>
 
@@ -49,13 +49,12 @@ export const OurValues = () => {
                 </div>
 
                 <div>
-                    <div className="flex flex-wrap gap-[1.6669rem]">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-4  md:gap-[1.6669rem]">
                         {cardData.map((item, index) => (
                             <Card key={index} img={item.img} text={item.text} description={item.description} />
                         ))}
                     </div>
                 </div>
-
             </div>
         </MaxWidthWrapper>
     )

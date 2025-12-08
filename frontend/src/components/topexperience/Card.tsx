@@ -23,7 +23,7 @@ export const Card = ({ image, country, continent, link, location, days, nights }
     transition-all duration-300
 
     /* Mobile: visible and no hover movement */
-    translate-y-0
+    -translate-y-15
 
     /* Desktop: animate on hover */
     md:translate-y-0
