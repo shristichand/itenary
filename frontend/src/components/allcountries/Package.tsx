@@ -8,7 +8,7 @@ import { Card } from "../gallery/Card";
 import { BottomSection } from "./BottomSection";
 import Link from "next/link";
 
-export const Package = ({ packageData }: { packageData: any }) => {
+export const Package = ({ packageData, galleryImages }: { packageData: any, galleryImages?: string[] }) => {
     const currentPackage = packageData?.attributes || packageData;
 
     if (!currentPackage) {
@@ -118,13 +118,19 @@ export const Package = ({ packageData }: { packageData: any }) => {
                     Photo Gallery
                 </Typography>
 
-                <div className="grid grid-cols-3 gap-x-[1.9063rem] gap-y-5">
-                    {currentPackage.gallery?.data?.map((img: any, index: number) => {
-                        const galleryUrl = img.attributes?.url
-                            ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${img.attributes.url}`
-                            : "/image/country/Thailand.png";
-                        return <Card key={index} img={galleryUrl} />;
-                    })}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-[1.9063rem] gap-y-5">
+                    {galleryImages && galleryImages.length > 0 ? (
+                        galleryImages.map((img: string, index: number) => (
+                            <Card key={index} img={img} />
+                        ))
+                    ) : (
+                        currentPackage.gallery?.data?.map((img: any, index: number) => {
+                            const galleryUrl = img.attributes?.url
+                                ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${img.attributes.url}`
+                                : "/image/country/Thailand.png";
+                            return <Card key={index} img={galleryUrl} />;
+                        })
+                    )}
                 </div>
             </div>
 

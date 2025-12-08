@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export const Card = ({ image, date, name, title, description, slug }: { image: string, date: string, name: string, title: string, description: string, slug: string }) => {
     return (
-        <div className="md:w-95 w-full h-[22.0625rem] md:h-fit  shadow-[#00000040] shadow-[0px_4px_20px_0px] rounded-[.5rem]">
+        <div className="md:w-95 w-full h-fit  shadow-[#00000040] shadow-[0px_4px_20px_0px] rounded-[.5rem]">
             <Image
                 src={image}
                 alt="blogimage"
@@ -19,7 +19,7 @@ export const Card = ({ image, date, name, title, description, slug }: { image: s
                 <div className="flex gap-5.25 ">
                     <div className="flex gap-2 items-center " >
                         <Calendar size={20} className="max-md:hidden" />
-                        <div className="md:hidden border-l-[.0988rem] border-[#4A4A4A] h-[.8881rem]"></div>
+                        <div className="md:hidden border-l-[.0988rem] border-[#4A4A4A] h-[.8881rem] rounded-l-[.25rem] ms-4"></div>
 
                         <Typography styleName="p3" weight="regular" className="text-neutral-900 max-md:leading-[1.3031rem]">  {new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                         </Typography>
@@ -35,7 +35,9 @@ export const Card = ({ image, date, name, title, description, slug }: { image: s
                 </div>
 
                 <div>
-                    <Typography styleName="p3" weight="regular" className="text-neutral-900 max-md:leading-[1.05rem] line-clamp-2">{description}</Typography>
+                    <Typography styleName="p3" weight="regular" className="text-neutral-900 max-md:leading-[1.05rem] line-clamp-2">
+                        <span dangerouslySetInnerHTML={{ __html: description }}></span>
+                    </Typography>
 
                 </div>
             </div>

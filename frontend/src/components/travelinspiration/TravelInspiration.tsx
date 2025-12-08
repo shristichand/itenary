@@ -10,7 +10,7 @@ export const TravelInspiration = ({ blogs = [] }: TravelInspirationProps) => {
     return (
         <section>
             <MaxWidthWrapper className="max-md:bg-white">
-                <div className="md:space-y-5 md:py-10 py-4">
+                <div className="md:space-y-5 md:py-10 py-4 pb-5">
                     <SubHeadingContainer headingtext="Travel Inspiration" paragraphtext="Real experiences from real travelers who have explored the world with us." />
                     <div className="flex flex-wrap justify-center md:gap-x-7.5 md:gap-y-10 gap-4">
                         {blogs.length > 0 ? (

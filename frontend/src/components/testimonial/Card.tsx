@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export const Card = ({ testimonial, star, image, name, location }: { testimonial: string, star: number, image: string, name: string, location: string }) => {
     return (
-        <div className="md:w-95 w-75.5 h-fit md:p-5 p-4 bg-neutral-100 flex flex-col gap-2 rounded-[.5rem] md:shadow-[#00000040] md:shadow-[0px_4px_20px_0px] ">
+        <div className="md:w-94 w-75.5 h-fit md:p-5 p-4 bg-neutral-100 flex flex-col gap-2 rounded-[.5rem] md:shadow-[#00000040] md:shadow-[0px_4px_20px_0px] ">
             {/* star section */}
             <div className="flex gap-1">
                 {Array.from({ length: star }).map((_, i) => (

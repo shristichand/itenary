@@ -1,6 +1,7 @@
 "use client";
 import { Calendar, Clock, Mail, Phone, Send } from "lucide-react";
 import { Typography } from "../common/Typography";
+import { useToast } from "../common/ToastContext";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
@@ -35,15 +36,17 @@ export const RightSection = ({ bestTime, days, nights, className }: RightSection
         resolver: zodResolver(contactSchema),
     });
 
+    const { showToast } = useToast();
+
     const mutation = useMutation({
         mutationFn: sendContactMessage,
         onSuccess: () => {
-            alert("Message sent successfully!");
+            showToast("Message sent successfully!", "success");
             reset();
         },
         onError: (error) => {
             console.error("Error sending message:", error);
-            alert("Failed to send message.");
+            showToast("Failed to send message.", "error");
         },
     });
 

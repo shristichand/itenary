@@ -9,17 +9,36 @@ import Link from "next/link"
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-export const BlogBottom = ({ blog, relatedBlogs = [] }: { blog: any, relatedBlogs?: any[] }) => {
+import { useState, useEffect } from "react";
+import { getBlogs } from "@/api/blog";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const BlogBottom = ({ blog }: { blog: any }) => {
     const attr = blog?.attributes || blog;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [relatedBlogs, setRelatedBlogs] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const res = await getBlogs();
+                if (res && res.data) {
+                    setRelatedBlogs(res.data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch related blogs", error);
+            }
+        };
+        fetchBlogs();
+    }, []);
 
     return (
         <MaxWidthWrapper>
             <div className="pt-10 pb-5">
                 {/* Render rich text content here. For now just description */}
                 <Typography styleName="p3" weight="regular" className="text-neutral-800" variant="div">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {attr?.Content || attr?.Description || "No content available."}
-                    </ReactMarkdown>
+
+                    <p dangerouslySetInnerHTML={{ __html: attr?.Content || attr?.Description || "No content available." }}></p>
                 </Typography>
             </div>
 
@@ -84,23 +103,28 @@ export const BlogBottom = ({ blog, relatedBlogs = [] }: { blog: any, relatedBlog
 
                     <div className="flex flex-wrap gap-x-7.5 gap-y-10 ">
                         {relatedBlogs.length > 0 ? (
-                            relatedBlogs.map((item, index) => {
-                                const rAttr = item.attributes || item;
-                                const imageUrl = rAttr.image?.data?.attributes?.url
-                                    ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${rAttr.image.data.attributes.url}`
-                                    : "/image/country/Dubai.png";
-                                return (
-                                    <Card
-                                        key={index}
-                                        image={imageUrl}
-                                        date={rAttr.date}
-                                        name={rAttr.author}
-                                        title={rAttr.title}
-                                        description={rAttr.description}
-                                        slug={rAttr.slug}
-                                    />
-                                );
-                            })
+                            relatedBlogs
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                .filter((item: any) => item.id !== blog.id)
+                                .slice(0, 3)
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                .map((item: any, index: number) => {
+                                    const rAttr = item.attributes || item;
+                                    const imageUrl = rAttr.image?.data?.attributes?.url
+                                        ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${rAttr.image.data.attributes.url}`
+                                        : "/image/country/Dubai.png";
+                                    return (
+                                        <Card
+                                            key={index}
+                                            image={imageUrl}
+                                            date={rAttr.publishedAt || rAttr.createdAt}
+                                            name={rAttr.author?.Name || "Admin"}
+                                            title={rAttr.title}
+                                            description={rAttr.description}
+                                            slug={rAttr.slug}
+                                        />
+                                    );
+                                })
                         ) : (
                             <p>No related articles found.</p>
                         )}

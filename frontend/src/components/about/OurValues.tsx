@@ -36,12 +36,12 @@ export const OurValues = () => {
                     </div>
 
                     <div className="mx-auto w-fit  border-primary-700 flex items-center">
-                        <Typography styleName="h6" weight="semibold" className="text-neutral-1000">
+                        <Typography styleName="h6" weight="semibold" className="text-neutral-1000 max-md:text-2xl max-md:leading-[3rem]">
                             What Drives Us
                         </Typography>
                     </div>
 
-                    <div className="pt-[.875rem]">
+                    <div className="pt-1 md:pt-[.875rem]">
                         <Typography styleName="p5" weight="regular" className="text-neutral-900 text-center">
                             Our core values guide every decision we make and every experience we create
                         </Typography>

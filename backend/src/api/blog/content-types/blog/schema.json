@@ -17,9 +17,6 @@
     "ReadDuration": {
       "type": "integer"
     },
-    "Content": {
-      "type": "richtext"
-    },
     "Image": {
       "type": "media",
       "multiple": true,
@@ -44,6 +41,13 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::author.author"
+    },
+    "Content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     }
   }
 }

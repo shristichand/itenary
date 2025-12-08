@@ -34,7 +34,9 @@ export default async function Home() {
       <div >
         <HeroSection heroData={heroData} />
         <MidSection />
+        <div className="max-md:pt-6">
         <AboutSection />
+        </div>
         <Whyus />
         <Region packages={packages} />
         <TopExperience />

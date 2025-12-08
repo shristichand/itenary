@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ChatWidget } from "@/components/common/ChatWidget";
 import QueryProvider from "@/components/providers/QueryProvider";
+import { ToastProvider } from "@/components/common/ToastContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,12 +44,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${inter.variable} antialiased`}
       >
         <QueryProvider>
-          <Navbar />
-          <div className="md:pt-20 pt-[3.2294rem] bg-[#F0F0F0] overflow-x-hidden"> 
-            {children}
-          </div>
-          <ChatWidget />
-          <Footer />
+          <ToastProvider>
+            <Navbar />
+            <div className="md:pt-20 pt-[3.2294rem] bg-[#F0F0F0] overflow-x-hidden">
+              {children}
+            </div>
+            <ChatWidget />
+            <Footer />
+          </ToastProvider>
         </QueryProvider>
       </body>
     </html>

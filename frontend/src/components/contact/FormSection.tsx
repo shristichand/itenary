@@ -1,6 +1,7 @@
 "use client";
 import { Send } from "lucide-react";
 import { Typography } from "../common/Typography";
+import { useToast } from "../common/ToastContext";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
@@ -20,15 +21,17 @@ export const FormSection = () => {
         resolver: zodResolver(contactSchema),
     });
 
+    const { showToast } = useToast();
+
     const mutation = useMutation({
         mutationFn: sendContactMessage,
         onSuccess: () => {
-            alert("Message sent successfully!");
+            showToast("Message sent successfully!", "success");
             reset();
         },
         onError: (error) => {
             console.error("Error sending message:", error);
-            alert("Failed to send message.");
+            showToast("Failed to send message.", "error");
         },
     });
 
@@ -56,7 +59,7 @@ export const FormSection = () => {
                 </div>
 
                 <div className="max-md:pt-[2rem]">
-                    <Button type="submit" variant="default" className="w-full py-[.5625rem] px-[12.9688rem]" disabled={mutation.isPending}>
+                    <Button type="submit" variant="default" className="w-full py-[.5625rem] px-[12.9688rem] cursor-pointer" disabled={mutation.isPending}>
                         <Typography styleName="p3" variant="p" weight="semibold" className="text-neutral-100 max-md:leading-[1.375rem]">
                             {mutation.isPending ? "Sending..." : "Send Message"}
                         </Typography>

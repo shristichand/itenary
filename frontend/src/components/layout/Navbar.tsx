@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Typography } from "../common/Typography";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowLeft, Menu, X, Home, Building2, MapPin, Image as ImageIcon, Newspaper, ChevronLeft } from "lucide-react";
 
@@ -42,12 +42,29 @@ export const Navbar = () => {
   const router = useRouter();
 
   const handleContactClick = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setIsOpen(false);
+    if (pathname === "/") {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      router.push("/#contact");
     }
+    setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    }
+
+  }, [isOpen])
 
   const isDetailPage = (pathname.startsWith('/blogs/') && pathname.split('/').length > 2) ||
     (pathname.startsWith('/packages/') && pathname.split('/').length > 2);
@@ -94,9 +111,9 @@ export const Navbar = () => {
         </div>
 
         {/* Desktop Button */}
-        <div className="hidden md:block w-30 h-10">
-          <Button variant="default" onClick={handleContactClick}>
-            <Typography styleName="p6" weight="semibold" variant="p" className="text-neutral-100">
+        <div className="hidden md:block w-30 h-10 ">
+          <Button variant="default" onClick={handleContactClick} className="cursor-pointer">
+            <Typography styleName="p6" weight="semibold" variant="p" className="text-neutral-100 ">
               Contact Us
             </Typography>
           </Button>
@@ -112,7 +129,7 @@ export const Navbar = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="fixed inset-0 z-[60] bg-[#F0F0F0] flex flex-col gap-4 ">
+        <div className="fixed h-dvh min-h-dvh inset-0 z-[999] bg-[#F0F0F0] flex flex-col gap-4 ">
           {/* Drawer Header */}
           <div className="flex items-center px-4 py-2 w-98.25 h-[3.2294rem] gap-2">
             <button onClick={() => setIsOpen(false)} className="mr-4">
@@ -160,7 +177,7 @@ export const Navbar = () => {
           {/* Drawer Footer Button */}
           <div className=" flex justify-end py-[.4688rem] pr-4">
             <Button variant="default" onClick={handleContactClick} className="w-auto">
-              <Typography styleName="p6" weight="semibold" variant="p" className="text-neutral-100">
+              <Typography styleName="p6" weight="semibold" variant="p" className="text-neutral-100 ">
                 Contact us
               </Typography>
             </Button>

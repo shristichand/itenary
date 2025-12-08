@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Typography } from "../common/Typography";
+import { useToast } from "../common/ToastContext";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../ui/input-group";
 import { Calendar, MapPin, Search } from "lucide-react";
 import { Button } from "../ui/button";
@@ -17,18 +18,22 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
         register,
         handleSubmit,
         formState: { errors },
+        reset
     } = useForm<HeroFormData>({
         resolver: zodResolver(heroSchema),
     });
 
+    const { showToast } = useToast();
+
     const mutation = useMutation({
         mutationFn: sendInquiry,
         onSuccess: () => {
-            alert("Inquiry submitted successfully!");
+            showToast("Inquiry submitted successfully!", "success");
+            reset();
         },
         onError: (error) => {
             console.error("Error submitting inquiry:", error);
-            alert("Failed to submit inquiry.");
+            showToast("Failed to submit inquiry.", "error");
         },
     });
 
@@ -81,9 +86,9 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                 </div>
 
                 {/* Text Overlay - Centered on Image */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full flex flex-col items-center gap-5 px-4">
-                    <div className="md:w-157.25 md:space-y-5 space-y-[.6094rem]">
-                        <Typography styleName="d2" weight="bold" variant="p" className="max-md:text-[2rem] max-md:leading-[1.9494rem] text-neutral-100 md:max-w-135 text-center">
+                <div className="absolute top-1/2 md:top-[45%] left-1/2 transform md:-translate-x-1/2 md:-translate-y-[95%] -translate-x-1/2 -translate-y-[50%] z-10 w-full flex flex-col items-center gap-5 px-4">
+                    <div className="md:w-157.25 md:space-y-5 space-y-[.6094rem] wrap-break-word">
+                        <Typography styleName="d2" weight="bold" variant="p" className="max-md:text-[1.5rem] max-md:leading-[1.9494rem] text-neutral-100 md:max-w-135 text-center">
                             {title}
                         </Typography>
 
@@ -195,7 +200,7 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                             <div className="flex justify-end">
                                 <Button type="submit" variant="default" className="w-full h-10 md:w-auto px-5! flex! items-center! justify-center" disabled={mutation.isPending}>
                                     <Typography styleName="p3" weight="semibold" className="text-neutral-100 max-md:leading-[1.375rem]">
-                                        {mutation.isPending ? "Searching..." : "Search"}
+                                        Inquire
                                     </Typography>
                                 </Button>
                             </div>

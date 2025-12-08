@@ -81,9 +81,9 @@ export const ChatWidget = () => {
     };
 
     return (
-        <div className="fixed bottom-10 right-10 z-50 flex flex-col items-end gap-4">
+        <div className="fixed max-md:top-0 right-0 left-0 md:bottom-10 md:right-10 z-50 flex flex-col items-end gap-4">
             {isOpen && (
-                <div className="w-100 h-150 bg-[#E8E8E8] rounded-[.5rem] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
+                <div className="w-full h-dvh md:w-100 md:h-150 bg-[#E8E8E8] rounded-[.5rem] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
                     {/* Header */}
                     <div className="bg-[#1D4197] p-4 flex justify-between items-center shrink-0">
                         <div className="flex gap-3 items-center">
@@ -211,7 +211,7 @@ export const ChatWidget = () => {
             {!isOpen && (
                 <div
                     onClick={() => setIsOpen(!isOpen)}
-                    className="w-15 h-15 p-4 bg-[#1D4197] rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-[#153275] transition-colors duration-300"
+                    className="w-15 h-15 p-4 fixed bottom-10 right-10 bg-[#1D4197] rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-[#153275] transition-colors duration-300"
                 >
                     <MessageCircle className="text-white w-7 h-7" />
                 </div>

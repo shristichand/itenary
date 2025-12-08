@@ -28,9 +28,6 @@
       "relation": "manyToOne",
       "target": "api::package.package",
       "inversedBy": "reviews"
-    },
-    "Email": {
-      "type": "email"
     }
   }
 }

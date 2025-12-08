@@ -19,7 +19,7 @@ export const Team = ({ img, name, position }: { img: string, name: string, posit
                     {name}
                 </Typography>
 
-                <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323] text-center max-md:text-[.625rem] max-md:leading-[.75rem]">
+                <Typography styleName="p3" variant="p" weight="medium" className="text-[#242323] text-center max-md:text-[.625rem] max-md:leading-[.75rem] whitespace-nowrap">
                     {position}
                 </Typography>
             </div>

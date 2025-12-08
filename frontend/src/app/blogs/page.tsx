@@ -11,7 +11,7 @@ export default async function Blogs() {
     }
 
     return (
-        <div className="pb-26.5">
+        <div>
             <TravelInspiration blogs={blogs} />
         </div>
     )

@@ -12,10 +12,10 @@ const Links = [{
     href: "/about"
 }, {
     name: "Destinations",
-    href: "/destinations"
+    href: "/destination"
 }, {
     name: "Contact",
-    href: "/contact"
+    href: "/#contact"
 }]
 
 const currentYear = new Date().getFullYear();
@@ -85,9 +85,9 @@ export const Footer = async () => {
         }
     ]
     return (
-        <footer className="bg-[#1D4197] text-neutral-100 ">
+        <footer className="bg-[#1D4197] text-neutral-100 overflow-x-hidden ">
             <MaxWidthWrapper>
-                <div className="flex flex-col md:flex-row justify-between md:py-10 p-4 h-auto md:h-54 gap-6 md:gap-0 relative ">
+                <div className="flex flex-col md:flex-row justify-between md:py-10 py-4 h-auto md:h-54 gap-6 md:gap-0 relative ">
                     {/* Column 1: Brand */}
                     <div className="flex flex-col  gap-3 w-full md:w-67.5">
                         <Typography styleName="p6" weight="semibold" className="text-neutral-100">
@@ -118,12 +118,12 @@ export const Footer = async () => {
                             <Typography styleName="p6" weight="semibold" className="max-md:text-[.875rem] max-md:leading-6 text-neutral-100">
                                 Contact Us
                             </Typography>
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col  gap-2">
                                 {ContactInfo.map((info) => (
-                                    <div key={info.name} className="flex items-center md:gap-3 gap-1 whitespace-nowrap ">
+                                    <div key={info.name} className="flex items-center md:gap-3 gap-1 ">
                                         {info.icon}
                                         <Typography styleName="p3" weight="regular" className="text-neutral-100 ">
-                                            <Link target="_blank" href={info.href}>{info.value}</Link>
+                                            <Link target="_blank" href={info.href} >{info.value}</Link>
                                         </Typography>
                                     </div>
                                 ))}

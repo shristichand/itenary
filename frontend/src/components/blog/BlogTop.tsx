@@ -42,7 +42,7 @@ export const BlogTop = ({ blog }: { blog: any }) => {
 
                         <div className="w-fit px-3 py-[.4375rem] bg-primary-700 rounded-full">
                             <Typography styleName="p5" weight="medium" variant="p" className="text-neutral-100 max-md:text-sm">
-                                {attr?.blogtag || "Travel"}
+                                {attr?.blogtag?.tag || "Travel"}
                             </Typography>
                         </div>
 

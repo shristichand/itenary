@@ -36,7 +36,7 @@ export const TeamSection = () => {
                 </div>
 
                 <div className="mx-auto w-fit">
-                    <div className="flex flex-wrap justify-center items-center gap-6 md:gap-15">
+                    <div className="flex  justify-center items-center gap-6 md:gap-15">
                         {teams.length > 0 ? (
                             teams.map((item: any, index: number) => {
                                 const imageUrl = item.Image?.url

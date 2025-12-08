@@ -473,7 +473,13 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   attributes: {
     author: Schema.Attribute.Relation<'oneToOne', 'api::author.author'>;
     blogtag: Schema.Attribute.Relation<'oneToOne', 'api::blogtag.blogtag'>;
-    Content: Schema.Attribute.RichText;
+    Content: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -787,7 +793,6 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Email: Schema.Attribute.Email;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

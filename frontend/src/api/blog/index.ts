@@ -17,7 +17,7 @@ export const getBlogs = async () => {
 export const getBlogBySlug = async (slug: string) => {
     try {
         // console.log(slug);
-        const response = await api.get(`/blogs?filters[Slug][$eq]=${slug}&populate[Image]=true&populate[author][populate][Image]=true`);
+        const response = await api.get(`/blogs?filters[Slug][$eq]=${slug}&populate[Image]=true&populate[author][populate][Image]=true&populate[blogtag]=true`);
         // console.log(response)
         return response.data;
     } catch (error) {

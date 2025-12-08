@@ -12,7 +12,7 @@ export const getGallery = async () => {
 
 export const getGalleryByCountry = async (country: string) => {
     try {
-        const response = await api.get(`/galleries?filters[country][$eq]=${country}&populate=*`);
+        const response = await api.get(`/galleries?filters[country][name][$eq]=${country}&populate=*`);
         return response.data;
     } catch (error) {
         console.error(`Error fetching gallery for country ${country}:`, error);

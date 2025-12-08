@@ -1,6 +1,7 @@
 "use client"
 import { Send, Star } from "lucide-react";
 import { Typography } from "../common/Typography";
+import { useToast } from "../common/ToastContext";
 import { Input } from "../ui/input";
 import { useState, useEffect } from "react";
 import { Textarea } from "../ui/textarea";
@@ -23,23 +24,25 @@ export const SendReview = ({ packageId }: { packageId: string }) => {
         resolver: zodResolver(reviewSchema),
     });
 
+    const { showToast } = useToast();
+
     const mutation = useMutation({
         mutationFn: sendReview,
         onSuccess: () => {
-            alert("Review submitted successfully!");
+            showToast("Review submitted successfully!", "success");
             reset();
             setRating(0);
         },
         onError: (error) => {
             console.error("Error submitting review:", error);
-            alert("Failed to submit review.");
+            showToast("Failed to submit review.", "error");
         },
     });
 
     const onSubmit = (data: ReviewFormData) => {
+        console.log("Submitting:", data);
         const payload = {
             Name: data.Name,
-            Email: data.Email,
             Location: data.Location,
             Rating: data.Rating,
             Review: data.Review,

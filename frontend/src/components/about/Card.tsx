@@ -22,7 +22,7 @@ export const Card = ({ img, text, description }: { img: string, text: string, de
                         {text}
                     </Typography>
 
-                    <Typography styleName="p2" variant="p" weight="regular" className="text-neutral-900 " >
+                    <Typography styleName="p2" variant="p" weight="regular" className="text-neutral-900 text-justify" >
                         {description}
                     </Typography>
                 </div>
