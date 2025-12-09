@@ -4,8 +4,14 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { getContactInfo } from "../../api/home";
 
 export const ContactInfo = async () => {
-    const contactRes = await getContactInfo();
-    const contactData = contactRes?.data[0];
+    let contactRes;
+    let contactData;
+    try {
+        contactRes = await getContactInfo();
+        contactData = contactRes?.data[0];
+    } catch (error) {
+        console.log(error)
+    }
 
 
     return (

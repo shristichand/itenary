@@ -6,7 +6,6 @@ export const sendInquiry = async (data: any) => {
         return response.data;
     } catch (error) {
         console.error("Error sending inquiry:", error);
-        throw error;
     }
 };
 
@@ -16,6 +15,5 @@ export const sendContactMessage = async (data: any) => {
         return response.data;
     } catch (error) {
         console.error("Error sending contact message:", error);
-        throw error;
     }
 };

@@ -6,7 +6,7 @@ export const getPackages = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching packages:", error);
-        throw error;
+       return [];
     }
 };
 
@@ -16,7 +16,7 @@ export const getPackagesByCountry = async (country: string) => {
         return response.data;
     } catch (error) {
         console.error(`Error fetching packages for country ${country}:`, error);
-        throw error;
+        return [];
     }
 };
 
@@ -26,6 +26,6 @@ export const getPackageBySlug = async (slug: string) => {
         return response.data;
     } catch (error) {
         console.error(`Error fetching package with slug ${slug}:`, error);
-        throw error;
+        return [];
     }
 };

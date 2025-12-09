@@ -6,7 +6,7 @@ export const getGallery = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching gallery:", error);
-        throw error;
+        
     }
 };
 
@@ -16,6 +16,6 @@ export const getGalleryByCountry = async (country: string) => {
         return response.data;
     } catch (error) {
         console.error(`Error fetching gallery for country ${country}:`, error);
-        throw error;
+        
     }
 };

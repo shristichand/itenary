@@ -10,6 +10,5 @@ export const sendMessage = async (message: string) => {
         return response.data;
     } catch (error) {
         console.error("Error sending message:", error);
-        throw error;
     }
 };

@@ -6,7 +6,7 @@ export const sendReview = async (data: any) => {
         return response.data;
     } catch (error) {
         console.error("Error sending review:", error);
-        throw error;
+        
     }
 };
 
@@ -16,7 +16,7 @@ export const getReviews = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching reviews:", error);
-        throw error;
+        
     }
 };
 
@@ -26,7 +26,7 @@ export const getReviewByPackageId = async (id: string) => {
         return response.data;
     } catch (error) {
         console.error(`Failed to fetch review with id ${id}:`, error);
-        throw error;
+        
     }
 };
 

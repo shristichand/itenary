@@ -26,16 +26,18 @@ export const Footer = async () => {
 
 
     const contactRes = await getContactInfo();
-    contactData = contactRes.data[0];
+    contactData = contactRes?.data?.[0] || null;
     const socialRes = await getSocialLinks();
-    socialData = socialRes?.data[0] || [];
+    socialData = socialRes?.data?.[0] || [];
 
     // Fallback or mapped data
-    const address = contactData?.Location;
+    const address = contactData?.Location || "Address not available";
 
-    const phone = contactData.PhoneNumber1 + (contactData.PhoneNumber2 ? "/" + contactData.PhoneNumber2 : "");
+    const phone = contactData?.PhoneNumber1
+        ? contactData.PhoneNumber1 + (contactData.PhoneNumber2 ? "/" + contactData.PhoneNumber2 : "")
+        : "Phone not available";
 
-    const email = contactData?.Email;
+    const email = contactData?.Email || "Email not available";
 
 
     const ContactInfo = [{

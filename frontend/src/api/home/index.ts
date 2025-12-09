@@ -7,6 +7,7 @@ export const getHeroData = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching hero data:", error);
+        return null;
     }
 };
 
@@ -16,6 +17,7 @@ export const getContactInfo = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching contact info:", error);
+        return null;
     }
 };
 
@@ -25,6 +27,7 @@ export const getSocialLinks = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching social links:", error);
+        return null;
     }
 };
 
@@ -34,6 +37,7 @@ export const getTeamData = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching team data:", error);
+        return null;
     }
 };
 
@@ -43,5 +47,6 @@ export const getStatData = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching stats:", error);
+        return null;
     }
 };
