@@ -17,16 +17,10 @@ interface RightSectionProps {
     days: number;
     nights: number;
     className: string;
+    contactData: any;
 }
 
-export const RightSection = ({ bestTime, days, nights, className }: RightSectionProps) => {
-    let contactInfo = useQuery({
-        queryKey: ["contact-info"],
-        queryFn: () => getContactInfo(),
-        enabled: true,
-    });
-    const contactData = contactInfo?.data?.data?.[0];
-
+export const RightSection = ({ bestTime, days, nights, className, contactData }: RightSectionProps) => {
     const {
         register,
         handleSubmit,

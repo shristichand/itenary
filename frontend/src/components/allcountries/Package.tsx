@@ -7,9 +7,18 @@ import { RightSection } from "./RightSection";
 import { Card } from "../gallery/Card";
 import { BottomSection } from "./BottomSection";
 import Link from "next/link";
+import { getContactInfo } from "@/api/home";
 
-export const Package = ({ packageData, galleryImages }: { packageData: any, galleryImages?: string[] }) => {
+export const Package = async ({ packageData, galleryImages }: { packageData: any, galleryImages?: string[] }) => {
     const currentPackage = packageData?.attributes || packageData;
+    let contactRes;
+    let contactData;
+    try {
+        contactRes = await getContactInfo();
+        contactData = contactRes?.data[0];
+    } catch (error) {
+        console.log(error)
+    }
 
     if (!currentPackage) {
         return (
@@ -98,6 +107,7 @@ export const Package = ({ packageData, galleryImages }: { packageData: any, gall
                         })) || []}
                     />
                     <RightSection
+                        contactData={contactData}
                         bestTime={currentPackage.BestTime || "Year Round"}
                         days={currentPackage.Days || 0}
                         nights={currentPackage.Nights || 0}
@@ -107,6 +117,7 @@ export const Package = ({ packageData, galleryImages }: { packageData: any, gall
             </MaxWidthWrapper>
 
             <RightSection
+                contactData={contactData}
                 bestTime={currentPackage.BestTime || "Year Round"}
                 days={currentPackage.Days || 0}
                 nights={currentPackage.Nights || 0}
