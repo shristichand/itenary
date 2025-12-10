@@ -3,14 +3,17 @@ import { OurValues } from "@/components/about/OurValues";
 import { Tag } from "@/components/about/Tag";
 import { TeamSection } from "@/components/about/TeamSection";
 import { AboutSection } from "@/components/aboutsection/AboutSection";
-
-export default function About() {
+import { getTeamData } from "@/api/home";
+export const revalidate = 60;
+export default async function About() {
+    const teamsRes = await getTeamData();
+    const teamsData = teamsRes?.data?.[0] || [];
     return (
         <div>
             <AboutSection />
             <Tag />
             <OurValues />
-            <TeamSection />
+            <TeamSection teamsData={teamsData} />
             <Last />
         </div>
     )

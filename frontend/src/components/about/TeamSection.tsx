@@ -6,13 +6,8 @@ import { Team } from "./Team"
 import { useQuery } from "@tanstack/react-query"
 import { getTeamData } from "@/api/home"
 
-export const TeamSection = () => {
-    const { data: teamData } = useQuery({
-        queryKey: ["team-data"],
-        queryFn: () => getTeamData()
-    });
+export const TeamSection = (teamsData: any) => {
 
-    const teams = teamData?.data || [];
 
     return (
         <MaxWidthWrapper>
@@ -37,8 +32,8 @@ export const TeamSection = () => {
 
                 <div className="mx-auto w-fit">
                     <div className="flex  justify-center items-center gap-6 md:gap-15">
-                        {teams.length > 0 ? (
-                            teams.map((item: any, index: number) => {
+                        {teamsData.length > 0 ? (
+                            teamsData.map((item: any, index: number) => {
                                 const imageUrl = item.Image?.url
                                     ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${item.Image.url}`
                                     : "/image/about/team1.png";
