@@ -7,6 +7,7 @@ interface RegionProps {
 }
 
 export const Region = ({ packages }: RegionProps) => {
+
     return (
         <section>
             <MaxWidthWrapper>
@@ -16,8 +17,8 @@ export const Region = ({ packages }: RegionProps) => {
                         {packages.length > 0 ? (
                             packages.map((item, index) => {
                                 const attr = item.attributes || item;
-                                const imageUrl = attr.image?.data?.attributes?.url
-                                    ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${attr.image.data.attributes.url}`
+                                const imageUrl = attr.Image?.url
+                                    ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${attr.Image.url}`
                                     : "/image/country/Thailand.png";
 
                                 return (
