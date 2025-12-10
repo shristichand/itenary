@@ -8,7 +8,7 @@ export default [
         useDefaults: true,
         directives: {
           'connect-src': ["'self'", 'https:'],
-          'img-src': ["'self'", 'data:', 'blob:', 'http://localhost:3000', 'http://192.168.1.73:3000', 'https://www.arcglobaltours.com/', 'https://www.arcglobaltoursandtravels.com/'], // Add your Next.js URL
+          'img-src': ["'self'", 'data:', 'blob:', 'http://localhost:3000', 'http://192.168.1.73:3000', 'https://www.arcglobaltours.com', 'https://www.arcglobaltoursandtravels.com'], // Add your Next.js URL
           'media-src': ["'self'", 'data:', 'blob:'],
           upgradeInsecureRequests: null,
         },
@@ -19,7 +19,7 @@ export default [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: ['http://localhost:3000', 'http://192.168.1.73:3000', 'https://www.arcglobaltours.com/', 'https://www.arcglobaltoursandtravels.com/'],
+      origin: ['http://localhost:3000', 'http://192.168.1.73:3000', 'https://www.arcglobaltours.com', 'https://www.arcglobaltoursandtravels.com'],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       headers: '*',
       credentials: true,
