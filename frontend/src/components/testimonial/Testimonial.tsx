@@ -8,11 +8,13 @@ import { useQuery } from "@tanstack/react-query";
 
 
 export const Testimonial = () => {
-    const { data: reviewsData } = useQuery({
+    const { data: reviewsData, isLoading } = useQuery({
         queryKey: ["reviews"],
         queryFn: () => getReviews()
     });
-
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
 
 
     const reviews = reviewsData?.data || [];
