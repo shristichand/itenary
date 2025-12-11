@@ -1,7 +1,6 @@
 import { getPackages } from "@/api/package";
 import { Region } from "@/components/region/Region";
 import { TopExperience } from "@/components/topexperience/TopExperience";
-export const runtime = 'edge';
 
 export const revalidate = 60;
 export default async function Destination() {

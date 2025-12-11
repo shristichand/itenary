@@ -1,6 +1,5 @@
 import { AllCountries } from "@/components/allcountries/AllCountries";
 import { getPackages } from "@/api/package";
-export const runtime = 'edge';
 export const revalidate = 60;
 export default async function Packages() {
     let packages = [];
