@@ -1,4 +1,3 @@
-"use client"
 import { SubHeadingContainer } from "../common/SubHeadingContainer";
 import { MaxWidthWrapper } from "../common/MaxWidthWrapper";
 import { Card } from "./Card";
@@ -7,15 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 
 
 
-export const Testimonial = () => {
-    const { data: reviewsData, isLoading } = useQuery({
-        queryKey: ["reviews"],
-        queryFn: () => getReviews(),
-        select: (res) => res.data
-    });
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
+export const Testimonial = async () => {
+
+    const reviews = await getReviews();
+    const reviewsData = reviews?.data;
 
 
     return (

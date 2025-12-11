@@ -71,7 +71,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="w-full z-50 flex justify-between px-5 md:px-15 py-4 md:h-20 h-[3.2294rem] fixed bg-neutral-100 items-center ">
+      <div className="w-full z-[999] flex justify-between px-5 md:px-15 py-4 md:h-20 h-[3.2294rem] fixed bg-neutral-100 items-center ">
         <div className="flex items-center gap-2">
           {isDetailPage && (
             <button onClick={() => router.back()} className="md:hidden">
