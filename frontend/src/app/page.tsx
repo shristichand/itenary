@@ -12,6 +12,7 @@ import { getBlogs } from "@/api/blog";
 import { getHeroData } from "@/api/home";
 
 export const revalidate = 60;
+export const runtime = 'edge';
 
 export default async function Home() {
   let packages = [];
@@ -35,7 +36,7 @@ export default async function Home() {
         <HeroSection heroData={heroData} />
         <MidSection />
         <div className="max-md:pt-6">
-        <AboutSection />
+          <AboutSection />
         </div>
         <Whyus />
         <Region packages={packages} />
