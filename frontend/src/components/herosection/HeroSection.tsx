@@ -82,8 +82,7 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                                 alt={`hero-${index}`}
                                 width={1920}
                                 height={1080}
-                                quality={100}
-                                priority={index === 0}
+                                preload
                                 className="w-full h-full object-cover object-bottom"
                             />
                         </div>
@@ -119,9 +118,7 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                 </div>
 
                 {/* Curve Overlay */}
-                <div className="w-full min-w-full absolute bottom-0 left-0 right-0 z-10"
-
-                >
+                <div className="w-[101%] min-w-[101%] absolute bottom-0 left-1/2 -translate-x-1/2 z-10">
                     <Image
                         src="/image/hero/curve.svg"
                         alt="curve"
