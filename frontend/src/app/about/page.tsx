@@ -7,7 +7,8 @@ import { getTeamData } from "@/api/home";
 export const revalidate = 60;
 export default async function About() {
     const teamsRes = await getTeamData();
-    const teamsData = teamsRes?.data?.[0] || [];
+    const teamsData = teamsRes?.data || [];
+    console.log(teamsData, "Teams Data")
     return (
         <div>
             <AboutSection />

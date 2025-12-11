@@ -25,8 +25,7 @@ export const Card = ({ image, country, continent, link, description }: { image: 
 
         md:translate-y-0
         md:group-hover:-translate-y-15
-        z-10
-        max-md:z-[100]
+       z-[100]
     "
                 >
                     <Typography styleName="p5" weight="semibold" className="text-neutral-100 max-md:text-[1.5rem] max-md:[1.5437rem]">

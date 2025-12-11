@@ -81,7 +81,7 @@ export const ChatWidget = () => {
     };
 
     return (
-        <div className="fixed max-md:top-0 right-0 left-0 md:bottom-10 md:right-10 z-50 flex flex-col items-end gap-4">
+        <div className="fixed max-md:top-0 right-0 left-0 md:bottom-10 md:right-10 z-[999] flex flex-col items-end gap-4">
             {isOpen && (
                 <div className="w-full h-dvh md:w-100 md:h-150 bg-[#E8E8E8] rounded-[.5rem] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
                     {/* Header */}

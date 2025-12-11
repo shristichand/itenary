@@ -71,7 +71,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="w-full z-[999] flex justify-between px-5 md:px-15 py-4 md:h-20 h-[3.2294rem] fixed bg-neutral-100 items-center ">
+      <div className="w-full z-[998] flex justify-between px-5 md:px-15 py-4 md:h-20 h-[3.2294rem] fixed bg-neutral-100 items-center ">
         <div className="flex items-center gap-2">
           {isDetailPage && (
             <button onClick={() => router.back()} className="md:hidden">
@@ -129,7 +129,7 @@ export const Navbar = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="fixed h-dvh min-h-dvh inset-0 z-[999] bg-[#F0F0F0] flex flex-col gap-4 ">
+        <div className="fixed h-dvh min-h-dvh inset-0 z-[998] bg-[#F0F0F0] flex flex-col gap-4 ">
           {/* Drawer Header */}
           <div className="flex items-center px-4 py-2 w-98.25 h-[3.2294rem] gap-2">
             <button onClick={() => setIsOpen(false)} className="mr-4">

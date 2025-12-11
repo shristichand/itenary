@@ -6,7 +6,7 @@ import { Team } from "./Team"
 import { useQuery } from "@tanstack/react-query"
 import { getTeamData } from "@/api/home"
 
-export const TeamSection = (teamsData: any) => {
+export const TeamSection = ({teamsData}: any) => {
 
 
     return (
@@ -32,14 +32,12 @@ export const TeamSection = (teamsData: any) => {
 
                 <div className="mx-auto w-fit">
                     <div className="flex  justify-center items-center gap-6 md:gap-15">
-                        {teamsData.length > 0 ? (
-                            teamsData.map((item: any, index: number) => {
+                        {teamsData?.length > 0 ? (
+                            teamsData?.map((item: any, index: number) => {
                                 const imageUrl = item.Image?.url
                                     ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${item.Image.url}`
                                     : "/image/about/team1.png";
-                                return (
-                                    <Team key={index} img={imageUrl} name={item.Name} position={item.Position} />
-                                );
+                                return <Team key={index} img={imageUrl} name={item.Name} position={item.Position} />
                             })
                         ) : (
                             <Typography styleName="p5" weight="regular" className="text-neutral-500">

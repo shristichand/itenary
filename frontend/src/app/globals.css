@@ -256,3 +256,9 @@ html {
 input.autoFillTransparent:-webkit-autofill {
   -webkit-background-clip: text;
 }
+
+.slider-fix {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}

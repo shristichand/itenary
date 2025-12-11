@@ -59,14 +59,19 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
     }, [heroImages.length]);
 
     return (
-        <div className="relative w-screen max-w-screen">
+        <div className="relative w-screen max-w-screen ">
             {/* Image Section */}
-            <div className="relative w-full md:h-167.5 h-[18.6875rem] overflow-hidden">
+            <div className="relative w-full md:h-167.5 h-[18.6875rem] ">
                 {/* Slider Track */}
-                <div
+                {/* <div
                     className="flex w-full h-full transition-transform duration-1000 ease-in-out"
                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                > */}
+                <div
+                    className="flex w-full h-full transition-transform duration-1000 ease-in-out slider-fix"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
+
                     {heroImages.map((img: string, index: number) => (
                         <div
                             key={index}
@@ -114,14 +119,16 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                 </div>
 
                 {/* Curve Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 z-10">
+                <div className="w-full min-w-full absolute bottom-0 left-0 right-0 z-10"
+
+                >
                     <Image
                         src="/image/hero/curve.svg"
                         alt="curve"
                         width={500}
                         height={500}
                         priority
-                        className="w-full h-full object-cover object-bottom translate-y-[.0625rem]"
+                        className="w-full h-full object-cover object-bottom  translate-y-[1px]"
                     />
 
                 </div>

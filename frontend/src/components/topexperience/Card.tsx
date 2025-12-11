@@ -28,7 +28,7 @@ export const Card = ({ image, country, continent, link, location, days, nights }
     /* Desktop: animate on hover */
     md:translate-y-0
     md:group-hover:-translate-y-15
-    max-md:z-[100]
+    z-[100]
   "
 
                 >
