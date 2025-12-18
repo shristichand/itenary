@@ -9,7 +9,6 @@ export const revalidate = 60;
 export default async function About() {
     const teamsRes = await getTeamData();
     const teamsData = teamsRes?.data || [];
-    console.log(teamsData, "Teams Data")
     return (
         <div>
             <AboutSection />
