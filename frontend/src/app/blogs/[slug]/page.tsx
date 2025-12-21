@@ -1,6 +1,5 @@
 import { getBlogBySlug } from "@/api/blog";
-import { BlogPage } from "@/components/blog/BlogPage"
-import { Metadata } from "next";
+import { BlogPage } from "@/components/blog/BlogPage";
 
 type PageProp = Promise<{ slug: string }>;
 

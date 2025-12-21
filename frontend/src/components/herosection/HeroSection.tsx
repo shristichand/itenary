@@ -1,17 +1,16 @@
 "use client";
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { Typography } from "../common/Typography";
-import { useToast } from "../common/ToastContext";
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../ui/input-group";
-import { Calendar, MapPin, Search } from "lucide-react";
-import { Button } from "../ui/button";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { heroSchema, HeroFormData } from "./schema";
+import { useMutation } from "@tanstack/react-query";
+import { Calendar, MapPin } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { sendInquiry } from "../../api/inquiry";
-import { getHeroData } from "../../api/home";
+import { useToast } from "../common/ToastContext";
+import { Typography } from "../common/Typography";
+import { Button } from "../ui/button";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "../ui/input-group";
+import { HeroFormData, heroSchema } from "./schema";
 
 export const HeroSection = ({ heroData }: { heroData: any }) => {
     const {
@@ -47,7 +46,7 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
     // Get images from API or use fallback
     const heroImages = heroData?.Image?.length > 0
         ? heroData.Image.map((img: any) => `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${img.url}`)
-        : ["/image/hero/travelheroimage.jpg"];
+        : ["/image/about/layoutImage.jpg"];
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
