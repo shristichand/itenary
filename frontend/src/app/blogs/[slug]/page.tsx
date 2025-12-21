@@ -3,7 +3,6 @@ import { BlogPage } from "@/components/blog/BlogPage";
 
 type PageProp = Promise<{ slug: string }>;
 
-export const runtime = 'edge';
 export const revalidate = 60;
 
 export default async function Blog({ params }: { params: PageProp }) {

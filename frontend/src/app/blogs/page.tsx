@@ -2,7 +2,6 @@ import { TravelInspiration } from "@/components/travelinspiration/TravelInspirat
 import { getBlogs } from "@/api/blog";
 
 export const revalidate = 60;
-export const runtime = 'edge';
 
 export default async function Blogs() {
     let blogs = [];

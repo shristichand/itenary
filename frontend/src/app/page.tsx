@@ -12,7 +12,6 @@ import { getBlogs } from "@/api/blog";
 import { getHeroData } from "@/api/home";
 
 export const revalidate = 60;
-export const runtime = 'edge';
 
 export default async function Home() {
   let packages = [];

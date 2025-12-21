@@ -5,7 +5,6 @@ import { TeamSection } from "@/components/about/TeamSection";
 import { AboutSection } from "@/components/aboutsection/AboutSection";
 import { getTeamData } from "@/api/home";
 export const revalidate = 60;
-export const runtime = 'edge';
 
 export default async function About() {
     const teamsRes = await getTeamData();

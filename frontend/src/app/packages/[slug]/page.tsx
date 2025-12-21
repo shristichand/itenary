@@ -4,7 +4,6 @@ import { getGalleryByCountry } from "@/api/gallery";
 
 type PageProp = Promise<{ slug: string }>;
 
-export const runtime = 'edge';
 export const revalidate = 60;
 
 export default async function PackagePage({ params }: { params: PageProp }) {
