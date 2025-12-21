@@ -1,5 +1,5 @@
 import { MaxWidthWrapper } from "../common/MaxWidthWrapper"
-import { Typography } from "../common/Typography"
+import { Typography } from "../common/Typography" 
 
 export const Tag = () => {
     return (
