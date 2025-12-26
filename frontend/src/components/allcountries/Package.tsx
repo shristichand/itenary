@@ -32,8 +32,10 @@ export const Package = async ({ packageData, galleryImages }: { packageData: any
         );
     }
 
-    const imageUrl = currentPackage.image?.data?.attributes?.url
-        ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${currentPackage.image.data.attributes.url}`
+    console.log(currentPackage, "current Package...djsalfjladsjfldsa")
+
+    const imageUrl = currentPackage.Image?.url
+        ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${currentPackage.Image.url}`
         : "/image/country/Thailand.png";
 
     return (

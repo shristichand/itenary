@@ -115,8 +115,8 @@ export const AllCountries = ({ packages = [] }: AllCountriesProps) => {
                     {displayPackages.length > 0 ? (
                         displayPackages.map((item, index) => {
                             const attr = item.attributes || item;
-                            const imageUrl = attr.image?.url
-                                ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${attr.image.url}`
+                            const imageUrl = attr.Image?.url
+                                ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${attr.Image.url}`
                                 : "/image/country/Thailand.png";
 
                             return (

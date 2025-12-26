@@ -10,17 +10,17 @@ const data = [{
 }, {
     title: "24/7 Customer Support",
     subtitle: "Our dedicated support team is available around the clock to assist you before, during, and after your trip.",
-    icon: "/image/icons/plane.svg",
+    icon: "/image/icons/headfone.svg",
     color: "#FFF7ED"
 }, {
     title: "Safe & Verified Tours",
     subtitle: "Safety is our priority. All our tours are verified, with guides who know the locations inside out.",
-    icon: "/image/icons/plane.svg",
+    icon: "/image/icons/safe.svg",
     color: "#F0FDF4"
 }, {
     title: "Easy Travel Assistance",
     subtitle: "From visa processing to airport pickups, we handle all the details so you can focus on enjoying your journey. ",
-    icon: "/image/icons/plane.svg",
+    icon: "/image/icons/globe.svg",
     color: "#FAF5FF"
 }]
 
