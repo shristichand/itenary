@@ -185,6 +185,7 @@ export const HeroSection = ({ heroData }: { heroData: any }) => {
                                         <InputGroup className="border border-neutral-400 h-10 focus-visible:ring-0 bg-transparent">
                                             <InputGroupInput
                                                 type="date"
+                                                min={new Date().toISOString().split("T")[0]}
                                                 placeholder="Select a date"
                                                 className="placeholder:text-neutral-800 placeholder:text-4 placeholder:leading-6"
                                                 {...register("Date")}
