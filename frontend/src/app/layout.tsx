@@ -25,7 +25,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "A.R.C Global",
-  description: "For over 15 years, A.r.c. Global Tours & Travels has been crafting unforgettable travel experiences for adventurers around the globe. We believe that travel is more than just visiting places; it's about creating stories that last a lifetime.",
+  description: "For over 15 years, A.R.C. Global Tours & Travels has been crafting unforgettable travel experiences for adventurers around the globe. We believe that travel is more than just visiting places; it's about creating stories that last a lifetime.",
 };
 
 const inter = Inter({

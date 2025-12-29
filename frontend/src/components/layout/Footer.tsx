@@ -93,7 +93,7 @@ export const Footer = async () => {
                     {/* Column 1: Brand */}
                     <div className="flex flex-col  gap-3 w-full md:w-67.5">
                         <Typography styleName="p6" weight="semibold" className="text-neutral-100">
-                            A.r.c. Global Tours & Travels
+                            A.R.C. Global Tours & Travels
                         </Typography>
                         <Typography styleName="p3" weight="regular" className="text-neutral-100">
                             Discover the world with our expert-crafted travel experiences. Creating memories that last a lifetime.
@@ -169,7 +169,7 @@ export const Footer = async () => {
             <div className="bg-[#112556] py-2 h-9.5">
                 <MaxWidthWrapper>
                     <Typography styleName="p3" weight="regular" className="max-md:text-[.625rem] max-md:leading-5 text-center text-neutral-100">
-                        Copyright © {currentYear} A.r.c. Global Tours & Travels. All rights reserved.
+                        Copyright © {currentYear} A.R.C. Global Tours & Travels. All rights reserved.
                     </Typography>
                 </MaxWidthWrapper>
             </div>
