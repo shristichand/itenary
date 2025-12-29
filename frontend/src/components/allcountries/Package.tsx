@@ -98,7 +98,7 @@ export const Package = async ({ packageData, galleryImages }: { packageData: any
             <MaxWidthWrapper>
                 <div className="flex flex-wrap md:flex-nowrap md:gap-10 justify-between pt-10 pb-5">
                     <MidSection
-                        description={currentPackage.Description}
+                        description={currentPackage.Overview}
                         places={currentPackage.Places?.map((place: any) => ({
                             text: place.placeName,
                             icon: "MapPin"
