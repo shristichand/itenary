@@ -32,7 +32,7 @@ export const Package = async ({ packageData, galleryImages }: { packageData: any
         );
     }
 
-    console.log(currentPackage, "current Package...djsalfjladsjfldsa")
+    // console.log(currentPackage, "current Package...djsalfjladsjfldsa")
 
     const imageUrl = currentPackage.Image?.url
         ? `${process.env.NEXT_PUBLIC_STRAPI_IMAGEURL || "http://localhost:1337"}${currentPackage.Image.url}`
