@@ -22,7 +22,7 @@ export const getPackagesByCountry = async (country: string) => {
 
 export const getPackageBySlug = async (slug: string) => {
     try {
-        const response = await api.get(`/packages?filters[Slug][$eq]=${slug}&populate[country]=true&populate[Places]=true&populate[Itenary][populate]=ListItem`);
+        const response = await api.get(`/packages?filters[Slug][$eq]=${slug}&populate[country]=true&populate[Places]=true&populate[Itenary][populate]=ListItem&populate[Image]=true`);
         return response.data;
     } catch (error) {
         console.error(`Error fetching package with slug ${slug}:`, error);

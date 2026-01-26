@@ -7,11 +7,14 @@ export const AboutSection = () => {
         <MaxWidthWrapper>
             <div className="flex flex-col md:flex-row gap-10 py-[1rem] md:py-10">
                 <ImageLayout />
-                <Description text="Your Journey, Our Expertise" description="For over 15 years, A.r.c. Global Tours & Travels  has been crafting unforgettable travel experiences for adventurers around the globe. We believe that travel is more than just visiting places; it's about creating stories that last a lifetime.
+                <Description
+  text="Your Journey, Our Expertise"
+  description="Established in 2082 B.S., A.R.C. Global Tours & Travels is a Nepal-based travel company providing national and international air ticketing, tour packages, and visa services.
 <br/>
 <br/>
+We offer domestic tours to Kathmandu Valley, Pokhara, Chitwan, Janakpur, and Muktinath, with Kailash Mansarovar trips arranged on customer demand. Our international packages include Dubai, Malaysia, Thailand, Singapore, Maldives, Vietnam, and Bali, along with visa assistance for various Asian and European countries."
+/>
 
-Our team of experienced travel consultants has explored the hidden corners of the world to bring you authentic, immersive experiences tailored to your preferences" />
             </div>
         </MaxWidthWrapper>
     );

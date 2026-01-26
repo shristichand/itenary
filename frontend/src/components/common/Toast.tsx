@@ -35,7 +35,7 @@ export const Toast = ({ message, type, onClose }: ToastProps) => {
     };
 
     return createPortal(
-        <div className="fixed max-md:w-full max-md:px-4 top-5 md:right-5 z-50 md:animate-in slide-in-from-right-10 fade-in duration-300">
+        <div className="fixed max-md:w-full max-md:px-4 top-5 md:right-5 z-[9999] md:animate-in slide-in-from-right-10 fade-in duration-300">
             <div className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border ${bgColors[type]} min-w-[300px] max-w-md`}>
                 {icons[type]}
                 <p className="flex-1 text-sm font-medium text-gray-800">{message}</p>

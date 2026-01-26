@@ -40,7 +40,7 @@ export const SendReview = ({ packageId }: { packageId: string }) => {
     });
 
     const onSubmit = (data: ReviewFormData) => {
-        console.log("Submitting:", data);
+        // console.log("Submitting:", data);
         const payload = {
             Name: data.Name,
             Location: data.Location,
